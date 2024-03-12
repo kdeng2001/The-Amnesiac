@@ -11,9 +11,9 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Character
+  - Memory Shard
+  - Endgate
   - 
   - 
   - 
@@ -40,4 +40,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1792678243
+    locked: 0
+  - name: 'Character '
+    uniqueID: 767743055
+    locked: 0
+  - name: Memory
+    uniqueID: 399959879
+    locked: 0
+  - name: Hole
+    uniqueID: 3988872195
+    locked: 0
+  - name: end
+    uniqueID: 1245372775
+    locked: 0
+  - name: Ground
+    uniqueID: 3864544861
     locked: 0
