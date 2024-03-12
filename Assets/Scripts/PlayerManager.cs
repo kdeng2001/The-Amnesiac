@@ -6,8 +6,9 @@ public class PlayerManager : MonoBehaviour
 {
     PlayerMovement playerMovement;
     PlayerJump playerJump;
-    [SerializeField] public float speed = 50;
-    [SerializeField] public float jumpHeight = 5;
+    [SerializeField] public float speed = 50f;
+    [SerializeField] public float baseJumpForce = 5f;
+    [SerializeField] public float holdJumpHeight = 15f;
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -18,6 +19,6 @@ public class PlayerManager : MonoBehaviour
     void FixedUpdate()
     {
         playerMovement.Move(speed);
-        playerJump.Jump(jumpHeight);
+        playerJump.Jump(baseJumpForce, holdJumpHeight);
     }
 }

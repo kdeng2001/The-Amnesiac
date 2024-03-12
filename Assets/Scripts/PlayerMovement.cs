@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     PlayerManager playerManager;
     Rigidbody2D rb;
     public Vector2 moveVelocity { get; private set; }
+    [SerializeField] public float baseDownVelocity = -.1f; 
+    float downVelocity = 0;
 
     void Start()
     {
@@ -17,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(float speed)
     {
-        rb.velocity = moveVelocity = new Vector2(speed * playerActionManager.moveValue.x, rb.velocity.y);
+        if(playerActionManager.moveValue.y < 0) { downVelocity = baseDownVelocity * speed; }
+        else { downVelocity = 0; }
+        rb.velocity = moveVelocity = new Vector2(speed * playerActionManager.moveValue.x, rb.velocity.y + downVelocity);
     }
 }

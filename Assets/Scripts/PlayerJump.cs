@@ -11,6 +11,10 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] public float groundCheckRadius = 1;
     [SerializeField] public int groundCheckLayerMask;
 
+    bool jumping = false;
+    float elapseTime = 0;
+    float maxHoldTime = .1f;
+
 
     void Start()
     {
@@ -18,12 +22,25 @@ public class PlayerJump : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Jump(float jumpHeight)
+    public void Jump(float baseJumpForce, float holdJumpHeight)
     {
-        if(playerActionManager.jumpValue && IsGrounded())
+        if(playerActionManager.jumpValue && IsGrounded() && !jumping)
         {
-            //Debug.Log("jump");
-            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            Debug.Log("jump");
+            rb.AddForce(Vector2.up * baseJumpForce, ForceMode2D.Impulse);
+            jumping = true;
+            elapseTime = 0;
+            rb.AddForce(Vector2.up * baseJumpForce);
+        }
+        else if(playerActionManager.jumpValue == false)
+        {
+            jumping = false;
+        }
+        else if(jumping && elapseTime < maxHoldTime && !IsGrounded())
+        {
+            //rb.AddForce(Vector2.up * ((jumpHeight - elapseTime * 2) * 100));
+            rb.AddForce(Vector2.up * (holdJumpHeight - elapseTime * 10) * 100);
+            elapseTime += Time.deltaTime;
         }
         
     }
