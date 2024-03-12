@@ -10,6 +10,8 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] public Transform groundCheck;
     [SerializeField] public float groundCheckRadius = 1;
     [SerializeField] public int groundCheckLayerMask;
+
+
     void Start()
     {
         playerActionManager = GetComponent<PlayerActionManager>();
@@ -21,7 +23,7 @@ public class PlayerJump : MonoBehaviour
         if(playerActionManager.jumpValue && IsGrounded())
         {
             //Debug.Log("jump");
-            rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
         }
         
     }

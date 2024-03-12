@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(float speed)
     {
-        moveVelocity = new Vector2(playerActionManager.moveValue.x,0);
-        rb.velocity = speed * Time.deltaTime * moveVelocity;
+        rb.velocity = moveVelocity = new Vector2(speed * Time.deltaTime * playerActionManager.moveValue.x, rb.velocity.y);
     }
 }
