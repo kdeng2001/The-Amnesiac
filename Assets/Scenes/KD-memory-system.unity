@@ -4376,6 +4376,7 @@ MonoBehaviour:
   spawnPosition:
   - {fileID: 808710880}
   - {fileID: 808710880}
+  - {fileID: 808710880}
   interactDialogue: 000000
   timedDialogue: 010101
   durationOfDialogue:
