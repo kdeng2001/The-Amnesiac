@@ -40,12 +40,13 @@ public class MovingPlatform : MonoBehaviour
         }
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Enter: " + other.tag);
         other.transform.SetParent(movingPlatform.transform);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         other.transform.SetParent(null);
     }
