@@ -3870,6 +3870,18 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 11.05
       objectReference: {fileID: 0}
+    - target: {fileID: 5345702619486300076, guid: 647fbb2438299e749af9cb6a8ec089b0, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5345702619486300076, guid: 647fbb2438299e749af9cb6a8ec089b0, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657084967556232683, guid: 647fbb2438299e749af9cb6a8ec089b0, type: 3}
+      propertyPath: m_Name
+      value: Sprite
+      objectReference: {fileID: 0}
     - target: {fileID: 8664741194795485102, guid: 647fbb2438299e749af9cb6a8ec089b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
