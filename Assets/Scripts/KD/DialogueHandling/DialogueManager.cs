@@ -41,6 +41,7 @@ public class PlayerDialogueManager : MonoBehaviour
     {
         for(int i=0; i<dialogueObject.Length; i++)
         {
+            
             dialogueObject[i].GetComponent<Dialogue>()
                 .SetVariables(
                 spawnPosition[i],
@@ -48,7 +49,22 @@ public class PlayerDialogueManager : MonoBehaviour
                 timedDialogue[i],
                 durationOfDialogue[i]
                 );
-            dialogueTrigger[i].SetTriggerNumber(i);
+            if(dialogueTrigger[i].gameObject.TryGetComponent(out DoorDialogueTrigger door))
+            {
+                door.SetTriggerNumber(i, ++i);
+                dialogueObject[i].GetComponent<Dialogue>()
+                    .SetVariables(
+                    spawnPosition[i],
+                    interactDialogue[i],
+                    timedDialogue[i],
+                    durationOfDialogue[i]
+                    );
+            }
+            else
+            {
+                dialogueTrigger[i].SetTriggerNumber(i);
+            }
+            
         }
     }
 

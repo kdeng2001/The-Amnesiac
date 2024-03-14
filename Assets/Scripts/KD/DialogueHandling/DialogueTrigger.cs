@@ -10,7 +10,7 @@ public class DialogueTrigger : MonoBehaviour
     /// <summary>
     /// maybe will have other ways to trigger dialogue?
     /// </summary>
-    [SerializeField] bool collisionTrigger;
+    [SerializeField] public bool collisionTrigger;
     int triggerNumber;
 
     public void StartDialogue(int dialogueNumber)
@@ -18,9 +18,9 @@ public class DialogueTrigger : MonoBehaviour
         LevelEventsManager.Instance.TriggerDialogue(dialogueNumber);
     }
     
-    public void SetTriggerNumber(int number) { triggerNumber = number; }
+    public virtual void SetTriggerNumber(int number) { triggerNumber = number; }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collisionTrigger) { StartDialogue(triggerNumber); }
     }

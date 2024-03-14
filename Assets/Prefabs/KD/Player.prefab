@@ -312,8 +312,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.042865694, y: 0.3947872}
-  m_Size: {x: 1.124003, y: 2.797251}
+  m_Offset: {x: -0.09207833, y: 0.3947872}
+  m_Size: {x: 1.4848957, y: 2.797251}
   m_Direction: 0
 --- !u!114 &6605439191396946542
 MonoBehaviour:
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 8696483710044677916}
-  groundCheckRadius: 0.5
+  groundCheckRadius: 0.4
   groundCheckLayerMask: 8
 --- !u!114 &2162212254562336470
 MonoBehaviour:
@@ -396,7 +396,7 @@ Transform:
   m_GameObject: {fileID: 5535693475265017964}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.543, z: 0}
+  m_LocalPosition: {x: -0.055, y: -0.793, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -409,7 +409,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5535693475265017964}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -436,7 +436,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
 --- !u!1 &7657084967556232683
 GameObject:
   m_ObjectHideFlags: 0
