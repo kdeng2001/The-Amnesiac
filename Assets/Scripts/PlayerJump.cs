@@ -26,7 +26,8 @@ public class PlayerJump : MonoBehaviour
     {
         if(playerActionManager.jumpValue && IsGrounded() && !jumping)
         {
-            Debug.Log("jump");
+            //Debug.Log("jump");
+            rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * baseJumpForce, ForceMode2D.Impulse);
             jumping = true;
             elapseTime = 0;

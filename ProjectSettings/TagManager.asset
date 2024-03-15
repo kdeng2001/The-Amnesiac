@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MemoryShard
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - Character
   - Memory Shard
   - Endgate
-  - 
+  - Background
   - 
   - 
   - 
@@ -44,6 +45,9 @@ TagManager:
   - name: Background
     uniqueID: 1792678243
     locked: 0
+  - name: Ground
+    uniqueID: 3864544861
+    locked: 0
   - name: 'Character '
     uniqueID: 767743055
     locked: 0
@@ -55,7 +59,4 @@ TagManager:
     locked: 0
   - name: end
     uniqueID: 1245372775
-    locked: 0
-  - name: Ground
-    uniqueID: 3864544861
     locked: 0
