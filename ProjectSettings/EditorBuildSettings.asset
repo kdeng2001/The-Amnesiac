@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Startmenu.unity
+    guid: 2a5c002bcbac35d4387f657f6203a801
+  - enabled: 1
     path: Assets/Scenes/Rakshaan.unity
     guid: 5450df1d61739d24d834e95d1e0aac7c
   m_configObjects: {}
