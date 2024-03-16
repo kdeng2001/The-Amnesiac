@@ -55,8 +55,8 @@ public class PlayerGlide : MonoBehaviour
                 GlideCooldown();
             }
             // check if glide too long, else playerGlide
-            if(glideEnd) { Debug.Log("Ran out of glide");  return; }
-            Debug.Log("gliding at: " + currentBirdPower);
+            if(glideEnd) { /*Debug.Log("Ran out of glide");*/  return; }
+            //Debug.Log("gliding at: " + currentBirdPower);
             rb.velocity = new Vector2(rb.velocity.x, -1 * (currentBirdPower));
         }
     }

@@ -8,27 +8,30 @@ using UnityEngine;
 public class Dialogue : MonoBehaviour
 {
     bool start = true;
-    private Transform spawnPosition;
-    private bool interactDialogue;
-    private bool timedDialogue;
-    private float durationOfDialogue;
+    public Transform spawnPosition {get; private set; }
+    public bool interactDialogue {get; private set; }
+    public bool timedDialogue { get; private set; }
+    public float durationOfDialogue { get; private set; }
+    [System.NonSerialized] public PlayerActionManager playerActionManager;
     
 
-    float elapsedTime;
-    void Start()
+    public float elapsedTime { get; private set; }
+    public virtual void Start()
     {
+        playerActionManager = GameObject.Find("Player").GetComponent<PlayerActionManager>();
         gameObject.SetActive(false);
     }
 
     /// <summary>
     /// Starts dialgoue
     /// </summary>
-    private void OnEnable()
+    public virtual void OnEnable()
     {
         if(start) { start = false; return; }
         if(timedDialogue) { elapsedTime = 0; }
-        transform.position = spawnPosition.position;
-        
+        if(transform.parent.GetComponent<DialogueChain>() == null) { transform.position = spawnPosition.position; }
+        else { transform.position = Vector3.zero; }
+        if (playerActionManager != null) { playerActionManager.SetInteract(false); }
     }
 
     /// <summary>
@@ -36,25 +39,49 @@ public class Dialogue : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if(!timedDialogue) { return; }
-        if(elapsedTime > durationOfDialogue) 
+        // Interact Dialogue
+        if(!timedDialogue) { HandleInteractDialogue(); }
+        // Timed Dialogue
+        else { HandleTimedDialogue(); }
+    }
+
+    public virtual void HandleInteractDialogue()
+    {
+        if(playerActionManager.interactValue)
+        {        
+            playerActionManager.SetInteract(false);
+            FinishDialogue(); 
+        }
+        //playerActionManager.SetInteract(false);
+        //FinishDialogue();
+
+    }
+    public virtual void HandleTimedDialogue()
+    {
+        if(elapsedTime > durationOfDialogue) { FinishDialogue(); }
+        else if(playerActionManager.interactValue) 
         {
+            playerActionManager.SetInteract(false);
             FinishDialogue();
         }
-        else
-        {
-            elapsedTime += Time.deltaTime;
-        }
+        else { Timer(); }
     }
+
+    public void Timer()
+    {
+        elapsedTime += Time.deltaTime;
+    }
+
+
     /// <summary>
     /// Call to remove dialogue when finished
     /// </summary>
-    public void FinishDialogue()
+    public virtual void FinishDialogue()
     {
         gameObject.SetActive(false);
     }
 
-    public void SetVariables(Transform sp, bool id, bool td, float dod)
+    public virtual void SetVariables(Transform sp, bool id, bool td, float dod)
     {
         spawnPosition = sp;
         interactDialogue = id;
