@@ -7,12 +7,14 @@ using UnityEngine;
 /// </summary>
 public class PlayerInteract : MonoBehaviour
 {
+    private PlayerManager playerManager;
     public bool inDialogueTrigger { get; private set; }
     public DialogueTrigger dialogueTrigger { get; private set; }
     public bool inConversation { get; private set; }
     bool setEvent = false;
     private void Start()
     {
+        playerManager = GetComponent<PlayerManager>();
         inDialogueTrigger = false;
         dialogueTrigger = null;
         inConversation = false;
@@ -36,7 +38,8 @@ public class PlayerInteract : MonoBehaviour
     {
         // Player initiates conversation
         if(inDialogueTrigger && (dialogueTrigger.conversation.InStart() || dialogueTrigger.conversation.InMiddle())) 
-        { 
+        {
+            playerManager.playerRB.velocity = Physics2D.gravity;
             dialogueTrigger.conversation.HandleConversation();
             inConversation = dialogueTrigger.conversation.InMiddle();
         }
