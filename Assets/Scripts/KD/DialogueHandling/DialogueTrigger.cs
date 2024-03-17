@@ -7,36 +7,41 @@ using UnityEngine;
 /// </summary>
 public class DialogueTrigger : MonoBehaviour
 {
-
-    [SerializeField] public bool collisionTrigger;
-    PlayerActionManager playerActionManager;
     PlayerManager playerManager;
-    int triggerNumber;
 
+    [Tooltip("Determines if dialogue starts from a collision or player interaction.")]
+    [SerializeField] public bool collisionTrigger;
+    [Tooltip("The conversation that starts when triggered.")]
+    [SerializeField] public Conversation conversation;
     private void Start()
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
-        playerActionManager = GameObject.Find("Player").GetComponent<PlayerActionManager>();
     }
-
-    public void StartDialogue(int dialogueNumber)
+    private void OnTriggerEnter2D(Collider2D collision) 
     {
-        LevelEventsManager.Instance.TriggerDialogue(dialogueNumber);
+        if (collision.CompareTag("Player"))
+        {
+            playerManager.playerInteract.SetInDialogueTrigger(true);
+            playerManager.playerInteract.SetDialogueTrigger(this);
+            if(collisionTrigger) 
+            { 
+                conversation.StartConversation();
+                // freezes player until dialogue is finished
+                playerManager.playerInteract.SetInConversation(true);
+                playerManager.playerRB.velocity = Physics2D.gravity;
+            }
+        }
+            
+      
     }
-    
-    public virtual void SetTriggerNumber(int number) { triggerNumber = number; }
-
-    public virtual void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision) 
     {
-        if (collisionTrigger) { StartDialogue(triggerNumber); }
+        if (collision.CompareTag("Player"))
+        {
+            playerManager.playerInteract.SetInDialogueTrigger(false);
+            playerManager.playerInteract.SetDialogueTrigger(null);
+        }
+            
     }
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Player") && playerActionManager.interactValue) 
-    //    {
-    //        StartDialogue(triggerNumber);   
-    //    }
-    //}
 
 }

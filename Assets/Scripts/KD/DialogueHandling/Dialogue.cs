@@ -4,88 +4,30 @@ using UnityEngine;
 
 /// <summary>
 /// Place in any dialogue object container
+/// Every Dialogue should start as a child of a Conversation GameObject
+/// Every Dialogue should have a speaker and speakPosition (mouth)
 /// </summary>
 public class Dialogue : MonoBehaviour
 {
-    bool start = true;
-    public Transform spawnPosition {get; private set; }
-    public bool interactDialogue {get; private set; }
-    public bool timedDialogue { get; private set; }
-    public float durationOfDialogue { get; private set; }
-    [System.NonSerialized] public PlayerActionManager playerActionManager;
-    
+    [Tooltip("The GameObject that will say the dialogue")]
+    [SerializeField] GameObject speaker;
+    [Tooltip("The Transform that dialogue will come from (mouth?)")]
+    [SerializeField] Transform speakPosition;
 
-    public float elapsedTime { get; private set; }
-    public virtual void Start()
-    {
-        playerActionManager = GameObject.Find("Player").GetComponent<PlayerActionManager>();
-        gameObject.SetActive(false);
-    }
-
-    /// <summary>
-    /// Starts dialgoue
-    /// </summary>
-    public virtual void OnEnable()
-    {
-        if(start) { start = false; return; }
-        if(timedDialogue) { elapsedTime = 0; }
-        if(transform.parent.GetComponent<DialogueChain>() == null) { transform.position = spawnPosition.position; }
-        else { transform.position = Vector3.zero; }
-        if (playerActionManager != null) { playerActionManager.SetInteract(false); }
-    }
-
-    /// <summary>
-    /// Handles timed dialogue
-    /// </summary>
-    private void Update()
-    {
-        // Interact Dialogue
-        if(!timedDialogue) { HandleInteractDialogue(); }
-        // Timed Dialogue
-        else { HandleTimedDialogue(); }
-    }
-
-    public virtual void HandleInteractDialogue()
-    {
-        if(playerActionManager.interactValue)
-        {        
-            playerActionManager.SetInteract(false);
-            FinishDialogue(); 
-        }
-        //playerActionManager.SetInteract(false);
-        //FinishDialogue();
-
-    }
-    public virtual void HandleTimedDialogue()
-    {
-        if(elapsedTime > durationOfDialogue) { FinishDialogue(); }
-        else if(playerActionManager.interactValue) 
-        {
-            playerActionManager.SetInteract(false);
-            FinishDialogue();
-        }
-        else { Timer(); }
-    }
-
-    public void Timer()
-    {
-        elapsedTime += Time.deltaTime;
-    }
-
-
-    /// <summary>
-    /// Call to remove dialogue when finished
-    /// </summary>
-    public virtual void FinishDialogue()
+    private void Start()
     {
         gameObject.SetActive(false);
     }
 
-    public virtual void SetVariables(Transform sp, bool id, bool td, float dod)
+    public void StartDialogue()
     {
-        spawnPosition = sp;
-        interactDialogue = id;
-        timedDialogue = td;
-        durationOfDialogue = dod;
+        transform.SetParent(speakPosition);
+        transform.localPosition = Vector3.zero;
+        gameObject.SetActive(true);
+    }
+    public void EndDialogue()
+    {
+        transform.SetParent(DialogueManager.Instance.transform);
+        gameObject.SetActive(false);
     }
 }

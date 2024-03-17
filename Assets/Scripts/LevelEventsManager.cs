@@ -17,18 +17,18 @@ public class LevelEventsManager : MonoBehaviour
     public event Action onMemoryShardFound;
     public void MemoryShardFound()
     {
-        if(onMemoryShardFound != null)
-        {
-            onMemoryShardFound();
-        }
+        if(onMemoryShardFound != null) { onMemoryShardFound(); }
     }
 
-    public event Action<int> onTriggerDialogue;
-    public void TriggerDialogue(int dialogueNumber)
+    public event Action<Conversation> onTriggerDialogue;
+    public void TriggerDialogue(Conversation conversation)
     {
-        if(onTriggerDialogue != null)
-        {
-            onTriggerDialogue(dialogueNumber);
-        }
+        if(onTriggerDialogue != null) { onTriggerDialogue(conversation); }
+    }
+
+    public event Action onInteract;
+    public void Interact()
+    {
+        if(onInteract != null) { onInteract(); }
     }
 }

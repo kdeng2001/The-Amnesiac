@@ -43,8 +43,9 @@ public class PlayerActionManager : MonoBehaviour
         InputAction interactAction = input.actions["interact"];
         if(interactAction != null)
         {
-            interactAction.started += context => SetInteract(interactAction.WasPressedThisFrame());
-            interactAction.performed += context => SetInteract(interactAction.WasPressedThisFrame());
+            interactAction.canceled += context => OnInteractStart(context);
+            //interactAction.started += context => SetInteract(interactAction.WasPressedThisFrame());
+            //interactAction.performed += context => SetInteract(interactAction.WasPressedThisFrame());
         }
     }
 
@@ -70,15 +71,22 @@ public class PlayerActionManager : MonoBehaviour
         InputAction interactAction = input.actions["interact"];
         if (interactAction != null)
         {
-            interactAction.started -= context => SetInteract(interactAction.WasPressedThisFrame());
-            interactAction.performed -= context => SetInteract(interactAction.WasPressedThisFrame());
+            interactAction.canceled -= context => OnInteractStart(context);
+            //interactAction.started -= context => SetInteract(interactAction.WasPressedThisFrame());
+            //interactAction.performed -= context => SetInteract(interactAction.WasPressedThisFrame());
         }
     }
 
     void SetMove(Vector2 value) { moveValue = value; }
     void SetJump(bool value) { jumpValue = value; }
     void SetGlide(bool value) { glideValue = value; }
-    public void SetInteract(bool value) { interactValue = value; }
+    void SetInteract(bool value) { interactValue = value; }
+    void OnInteractStart(InputAction.CallbackContext context) 
+    {
+        SetInteract(context.ReadValueAsButton());
+        LevelEventsManager.Instance.Interact();
+        Debug.Log("interact");
+    }
 }
 
     

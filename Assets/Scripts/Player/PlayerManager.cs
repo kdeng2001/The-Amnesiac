@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    public Rigidbody2D playerRB { get; private set; }
     public PlayerMovement playerMovement { get; private set; }
     public PlayerJump playerJump {get; private set;}
     public PlayerGlide playerGlide { get; private set; }
     public PlayerGrounded playerGrounded { get; private set; }
     public PlayerAnimation playerAnimation { get; private set; }
+    public PlayerInteract playerInteract { get; private set; }
     /// <summary>
     /// playerMovement depends on speed
     /// </summary>
@@ -32,16 +34,19 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float glideTime = 2f;
     void Start()
     {
+        playerRB = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
         playerJump = GetComponent<PlayerJump>();
         playerGlide = GetComponent<PlayerGlide>();
         playerGrounded = GetComponent<PlayerGrounded>();
         playerAnimation = GetComponent<PlayerAnimation>();
+        playerInteract = GetComponent<PlayerInteract>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(playerInteract.inConversation) { return; }
         playerMovement.Move(speed);
         playerJump.Jump(baseJumpForce, holdJumpHeight);
         playerGlide.Glide(birdBasePower, birdDecreasePowerRate, glideTime);
