@@ -48,7 +48,7 @@ public class MemoryManager : MonoBehaviour
     IEnumerator DelayDisable(GameObject memory)
     {
         yield return new WaitForSeconds(.1f);
-        memory.GetComponent<SpriteRenderer>().enabled = false;
+        memory.GetComponentInChildren<SpriteRenderer>().enabled = false;
         //memory.SetActive(false);
     }
 

@@ -40,7 +40,7 @@ public class PlayerInteract : MonoBehaviour
             dialogueTrigger.conversation.HandleConversation();
             inConversation = dialogueTrigger.conversation.InMiddle();
         }
-        else if(inDialogueTrigger && dialogueTrigger.conversation.InEnd()) { }
+        else if(inDialogueTrigger && dialogueTrigger.conversation.InEnd()) { inConversation = dialogueTrigger.conversation.InEnd(); }
     }
 
     public void SetInDialogueTrigger(bool value)
