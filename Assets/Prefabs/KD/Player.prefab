@@ -178,14 +178,15 @@ GameObject:
   m_Component:
   - component: {fileID: 441806838173360895}
   - component: {fileID: 2156215627203304808}
-  - component: {fileID: 3395781005628931249}
   - component: {fileID: 4737971643474698070}
   - component: {fileID: 8342503460752891407}
+  - component: {fileID: 3395781005628931249}
   - component: {fileID: 6605439191396946542}
   - component: {fileID: 4106301045048578212}
   - component: {fileID: 6348180604024686127}
   - component: {fileID: 2162212254562336470}
   - component: {fileID: 6930947977830621453}
+  - component: {fileID: 8438487704353257620}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -242,18 +243,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: 0
   m_Camera: {fileID: 0}
---- !u!114 &3395781005628931249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3469930761866728472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a53c75b0919ff441936985cca053266, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &4737971643474698070
 Rigidbody2D:
   serializedVersion: 4
@@ -316,6 +305,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.09207833, y: 0.3947872}
   m_Size: {x: 1.4848957, y: 2.797251}
   m_Direction: 0
+--- !u!114 &3395781005628931249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469930761866728472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a53c75b0919ff441936985cca053266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6605439191396946542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   baseJumpForce: 10
-  holdJumpHeight: 2
+  holdJumpHeight: 2.4
 --- !u!114 &4106301045048578212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,9 +357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78fe8646f94ce224e94d657788d98248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheck: {fileID: 8696483710044677916}
-  groundCheckRadius: 0.4
-  groundCheckLayerMask: 8
 --- !u!114 &2162212254562336470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +381,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316187991654f354c9414edb451c0736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdPower: {x: 0, y: 1}
+  birdBasePower: 5
+  birdDecreasePowerRate: 1
+  glideTime: 2
+--- !u!114 &8438487704353257620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469930761866728472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 578ccfb6ff3dbeb479486c1ff858ab42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 8696483710044677916}
+  groundCheckRadius: 0.4
+  groundCheckLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &5535693475265017964
 GameObject:
   m_ObjectHideFlags: 0

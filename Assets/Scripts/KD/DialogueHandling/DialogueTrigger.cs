@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Place in any object that will trigger dialogue 
+/// Place in any object that will trigger dialogue
 /// </summary>
 public class DialogueTrigger : MonoBehaviour
 {
-    /// <summary>
-    /// maybe will have other ways to trigger dialogue?
-    /// </summary>
+
     [SerializeField] public bool collisionTrigger;
+    PlayerActionManager playerActionManager;
+    PlayerManager playerManager;
     int triggerNumber;
+
+    private void Start()
+    {
+        playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
+        playerActionManager = GameObject.Find("Player").GetComponent<PlayerActionManager>();
+    }
 
     public void StartDialogue(int dialogueNumber)
     {
@@ -24,5 +30,13 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (collisionTrigger) { StartDialogue(triggerNumber); }
     }
+
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Player") && playerActionManager.interactValue) 
+    //    {
+    //        StartDialogue(triggerNumber);   
+    //    }
+    //}
 
 }
