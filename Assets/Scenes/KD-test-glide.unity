@@ -4365,6 +4365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionTrigger: 1
   conversation: {fileID: 427068126}
+  ally: 0
 --- !u!1 &787552232
 GameObject:
   m_ObjectHideFlags: 0
@@ -4645,7 +4646,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1845380459034811088, guid: 4adb0a18764eec94e8a5779b68652f4a, type: 3}
       propertyPath: m_Name
-      value: InvisibleWallStart
+      value: InvisibleWallEnd
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845380459034811088, guid: 4adb0a18764eec94e8a5779b68652f4a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3541512780308944433, guid: 4adb0a18764eec94e8a5779b68652f4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -8423,7 +8428,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1845380459034811088, guid: 4adb0a18764eec94e8a5779b68652f4a, type: 3}
       propertyPath: m_Name
-      value: InvisibleWallEnd
+      value: InvisibleWallStart
       objectReference: {fileID: 0}
     - target: {fileID: 3541512780308944433, guid: 4adb0a18764eec94e8a5779b68652f4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -10109,6 +10114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionTrigger: 1
   conversation: {fileID: 2056206324}
+  ally: 0
 --- !u!1 &2105554922
 GameObject:
   m_ObjectHideFlags: 0
@@ -10635,6 +10641,22 @@ PrefabInstance:
     - target: {fileID: 8147313909079523881, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700712643639359257, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700712643639359257, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700712643639359257, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d8829d84a4b76a44384d5bf8f5be0fd5, type: 2}
+    - target: {fileID: 8964669686346267407, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
+      propertyPath: ally
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8964669686346267407, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
       propertyPath: conversation
