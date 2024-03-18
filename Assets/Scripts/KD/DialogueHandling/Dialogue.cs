@@ -4,61 +4,30 @@ using UnityEngine;
 
 /// <summary>
 /// Place in any dialogue object container
+/// Every Dialogue should start as a child of a Conversation GameObject
+/// Every Dialogue should have a speaker and speakPosition (mouth)
 /// </summary>
 public class Dialogue : MonoBehaviour
 {
-    bool start = true;
-    private Transform spawnPosition;
-    private bool interactDialogue;
-    private bool timedDialogue;
-    private float durationOfDialogue;
-    
+    [Tooltip("The GameObject that will say the dialogue")]
+    [SerializeField] GameObject speaker;
+    [Tooltip("The Transform that dialogue will come from (mouth?)")]
+    [SerializeField] Transform speakPosition;
 
-    float elapsedTime;
-    void Start()
+    private void Start()
     {
         gameObject.SetActive(false);
     }
 
-    /// <summary>
-    /// Starts dialgoue
-    /// </summary>
-    private void OnEnable()
+    public void StartDialogue()
     {
-        if(start) { start = false; return; }
-        if(timedDialogue) { elapsedTime = 0; }
-        transform.position = spawnPosition.position;
-        
+        transform.SetParent(speakPosition);
+        transform.localPosition = Vector3.zero;
+        gameObject.SetActive(true);
     }
-
-    /// <summary>
-    /// Handles timed dialogue
-    /// </summary>
-    private void Update()
+    public void EndDialogue()
     {
-        if(!timedDialogue) { return; }
-        if(elapsedTime > durationOfDialogue) 
-        {
-            FinishDialogue();
-        }
-        else
-        {
-            elapsedTime += Time.deltaTime;
-        }
-    }
-    /// <summary>
-    /// Call to remove dialogue when finished
-    /// </summary>
-    public void FinishDialogue()
-    {
+        transform.SetParent(DialogueManager.Instance.transform);
         gameObject.SetActive(false);
-    }
-
-    public void SetVariables(Transform sp, bool id, bool td, float dod)
-    {
-        spawnPosition = sp;
-        interactDialogue = id;
-        timedDialogue = td;
-        durationOfDialogue = dod;
     }
 }

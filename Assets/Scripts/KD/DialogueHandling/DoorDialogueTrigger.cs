@@ -2,40 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorDialogueTrigger : DialogueTrigger
+public class DoorDialogueTrigger : ConditionalDialogueTrigger
 {
-    [Tooltip("Option 1: The number associating with the dialogue used when the player found all memory shards.")]
-    [System.NonSerialized] public int triggerNum1;
-    [Tooltip("Option 2: The number associating with the dialogue used when the player has not found all memory shards.")]
-    [System.NonSerialized] public int triggerNum2;
-
-    public void SetTriggerNumber(int num1, int num2)
+    bool condition;
+    public override void CheckCondition()
     {
-        triggerNum1 = num1;
-        triggerNum2 = num2;
+        condition = MemoryManager.Instance.FoundAllMemoryShards();
+        if (condition) { SetUseIndex(0); }
+        else { SetUseIndex(1); }
     }
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collisionTrigger)
+        base.OnTriggerEnter2D(collision);
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(useIndex == 0)
         {
-            if(MemoryManager.Instance.FoundAllMemoryShards())
-            {
-                Debug.Log("door trigger: " + triggerNum1);
-                StartDialogue(triggerNum1);
-                StartCoroutine(DelayDestroy());
-            }
-            else
-            {
-                Debug.Log("door trigger: " + triggerNum2);
-                StartDialogue(triggerNum2);
-                
-            }
+            if(dialogueTriggers[0].conversation.InEnd()) { gameObject.SetActive(false); }
         }
     }
 
-    IEnumerator DelayDestroy()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
-    }
 }

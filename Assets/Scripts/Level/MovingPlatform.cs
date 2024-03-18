@@ -11,9 +11,16 @@ public class MovingPlatform : MonoBehaviour
 
     [SerializeField] GameObject movingPlatform;
     bool isChangingDirection;
+    PlayerInteract playerInteract;
+
+    private void Start()
+    {
+        playerInteract = GameObject.Find("Player").GetComponent<PlayerInteract>();
+    }
 
     private void FixedUpdate()
     {
+        if(playerInteract.inConversation) { return; }
         //Moving to the desired position
         if (waypointIndex < waypoints.Length)
         {
