@@ -11,12 +11,26 @@ public class Conversation : MonoBehaviour
 {
     [Tooltip("All dialogues in the conversation, in order from start to end.")]
     [SerializeField] Dialogue[] dialogueList;
+    [SerializeField] bool specialDialogue;
 
     bool start = true;
     bool middle = false;
     bool end = false;
     int currentPosition = 0;
 
+    public virtual void HandleSpecialDialogue() 
+    {
+
+        Camera.main.transform.localPosition += new Vector3(0, 8, 0);
+        GameObject.Find("Player").GetComponentInChildren<SpriteRenderer>().flipX = true;
+        //Camera.main.orthographicSize += 10;
+    }
+    public virtual void RevertSpecialDialogue()
+    {
+        Camera.main.transform.localPosition -= new Vector3(0, 8, 0);
+        GameObject.Find("Player").GetComponentInChildren<SpriteRenderer>().flipX = false;
+        //Camera.main.orthographicSize -= 10;
+    }
     public void HandleConversation()
     {
         /* 
@@ -25,6 +39,7 @@ public class Conversation : MonoBehaviour
         */
         if(start && currentPosition==0) { StartConversation(); }
         else { NextDialogue(); }
+        
     }
 
     /// <summary>
@@ -38,6 +53,7 @@ public class Conversation : MonoBehaviour
         middle = true;
         end = false;
         dialogueList[currentPosition].StartDialogue();
+        if (specialDialogue) { HandleSpecialDialogue(); }
 
     }
     /// <summary>
@@ -65,6 +81,7 @@ public class Conversation : MonoBehaviour
         middle = false;
         end = true;
         UnPauseActivity();
+        if(specialDialogue) { RevertSpecialDialogue(); }
     }
     public bool InStart() { return start; }
     public bool InMiddle() { return middle; }
