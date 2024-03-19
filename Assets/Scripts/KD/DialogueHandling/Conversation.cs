@@ -18,19 +18,17 @@ public class Conversation : MonoBehaviour
     bool end = false;
     int currentPosition = 0;
 
-    public virtual void HandleSpecialDialogue() 
-    {
+    //delegate void OnStartConversation();
+    //OnStartConversation onStartConversation;
 
-        Camera.main.transform.localPosition += new Vector3(0, 8, 0);
-        GameObject.Find("Player").GetComponentInChildren<SpriteRenderer>().flipX = true;
-        //Camera.main.orthographicSize += 10;
-    }
-    public virtual void RevertSpecialDialogue()
-    {
-        Camera.main.transform.localPosition -= new Vector3(0, 8, 0);
-        GameObject.Find("Player").GetComponentInChildren<SpriteRenderer>().flipX = false;
-        //Camera.main.orthographicSize -= 10;
-    }
+    //private void Start()
+    //{
+    //    onStartConversation = StartConversation;
+    //}
+
+    public virtual void StartSpecialDialogue() { }
+    public virtual void HandleSpecialDialogue() { }
+    public virtual void EndSpecialDialogue() { }
     public void HandleConversation()
     {
         /* 
@@ -52,8 +50,9 @@ public class Conversation : MonoBehaviour
         start = false;
         middle = true;
         end = false;
+        if (specialDialogue) { StartSpecialDialogue(); }
         dialogueList[currentPosition].StartDialogue();
-        if (specialDialogue) { HandleSpecialDialogue(); }
+        
 
     }
     /// <summary>
@@ -64,6 +63,7 @@ public class Conversation : MonoBehaviour
 
         dialogueList[currentPosition].EndDialogue();
         // reach end of dialogue, or start next dialogue
+        HandleSpecialDialogue();
         if (++currentPosition >= dialogueList.Length)
         {
             EndConversation();
@@ -81,11 +81,12 @@ public class Conversation : MonoBehaviour
         middle = false;
         end = true;
         UnPauseActivity();
-        if(specialDialogue) { RevertSpecialDialogue(); }
+        if(specialDialogue) { EndSpecialDialogue(); }
     }
     public bool InStart() { return start; }
     public bool InMiddle() { return middle; }
     public bool InEnd() { return end; }
+    public int GetCurrentPosition() { return currentPosition; }
     /// <summary>
     /// pauses movement of players, platforms, etc... while dialogue is happening
     /// </summary>

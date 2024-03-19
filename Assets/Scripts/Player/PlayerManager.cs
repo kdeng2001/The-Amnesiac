@@ -46,7 +46,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(playerInteract.inConversation) { return; }
+        if(playerInteract.inConversation) { playerAnimation.SetAnimationIdle(); return; }
         playerMovement.Move(speed);
         playerJump.Jump(baseJumpForce, holdJumpHeight);
         playerGlide.Glide(birdBasePower, birdDecreasePowerRate, glideTime);

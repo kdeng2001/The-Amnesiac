@@ -13,6 +13,7 @@ public class DialogueTrigger : MonoBehaviour
     [Tooltip("The conversation that starts when triggered.")]
     [SerializeField] public Conversation conversation;
     [SerializeField] public bool ally;
+    [SerializeField] float highlight = 0.2f;
     private void Start()
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
@@ -25,7 +26,7 @@ public class DialogueTrigger : MonoBehaviour
             playerManager.playerInteract.SetDialogueTrigger(this);               
             if(ally)
             {
-                gameObject.GetComponentInChildren<Renderer>().sharedMaterial.SetFloat("_OutlineThickness", 1);
+                gameObject.GetComponentInChildren<Renderer>().sharedMaterial.SetFloat("_OutlineThickness", highlight);
             }
             if(collisionTrigger) 
             {
