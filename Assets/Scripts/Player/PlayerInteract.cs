@@ -41,6 +41,7 @@ public class PlayerInteract : MonoBehaviour
         {
             playerManager.playerRB.velocity = Physics2D.gravity;
             dialogueTrigger.conversation.HandleConversation();
+            Debug.Log("is null conversation:" + (dialogueTrigger == null));
             inConversation = dialogueTrigger.conversation.InMiddle();
         }
         else if(inDialogueTrigger && dialogueTrigger.conversation.InEnd()) { inConversation = dialogueTrigger.conversation.InEnd(); }

@@ -18,26 +18,13 @@ public class Conversation : MonoBehaviour
     bool end = false;
     int currentPosition = 0;
 
-    //delegate void OnStartConversation();
-    //OnStartConversation onStartConversation;
-
-    //private void Start()
-    //{
-    //    onStartConversation = StartConversation;
-    //}
-
     public virtual void StartSpecialDialogue() { }
     public virtual void HandleSpecialDialogue() { }
     public virtual void EndSpecialDialogue() { }
     public void HandleConversation()
     {
-        /* 
-         * should I include a check for interact action,
-         * or have this be called on an event?
-        */
         if(start && currentPosition==0) { StartConversation(); }
         else { NextDialogue(); }
-        
     }
 
     /// <summary>
@@ -66,6 +53,7 @@ public class Conversation : MonoBehaviour
         HandleSpecialDialogue();
         if (++currentPosition >= dialogueList.Length)
         {
+            Debug.Log("EndConversation");
             EndConversation();
             return;
         }
