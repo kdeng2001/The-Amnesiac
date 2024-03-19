@@ -46,7 +46,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(playerInteract.inConversation);
+        //Debug.Log(playerInteract.inConversation);
         if(playerInteract.inConversation) { playerAnimation.SetAnimationIdle(); return; }
         playerMovement.Move(speed);
         playerJump.Jump(baseJumpForce, holdJumpHeight);

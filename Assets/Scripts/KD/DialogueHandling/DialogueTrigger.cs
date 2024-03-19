@@ -51,7 +51,10 @@ public class DialogueTrigger : MonoBehaviour
                 gameObject.GetComponentInChildren<Renderer>().sharedMaterial.SetFloat("_OutlineThickness", 0);
             }
             playerManager.playerInteract.SetInDialogueTrigger(false);
-            StartCoroutine(DelayNullTrigger());
+            if(TryGetComponent(out Memory memory)) { return; }
+            if (gameObject.name == "DoorTrigger" || gameObject.name =="DoorTrigger (1)") { return; }
+            playerManager.playerInteract.SetDialogueTrigger(null);
+            //StartCoroutine(DelayNullTrigger());
         }
             
     }
@@ -59,6 +62,10 @@ public class DialogueTrigger : MonoBehaviour
     IEnumerator DelayNullTrigger()
     {
         yield return new WaitForSeconds(1f);
-        playerManager.playerInteract.SetDialogueTrigger(null);
+        if(playerManager.playerInteract.dialogueTrigger != null) 
+        {
+            
+        }
+        
     }
 }
