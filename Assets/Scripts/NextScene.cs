@@ -10,7 +10,7 @@ public class NextScene : MonoBehaviour
     private void OnEnable()
     {
 
-        SceneManager.LoadScene( "Narration" , LoadSceneMode.Single);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
 
     }
 

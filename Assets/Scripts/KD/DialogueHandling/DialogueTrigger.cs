@@ -20,6 +20,7 @@ public class DialogueTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision) 
     {
+        if(TryGetComponent(out NPC npc)) { npc.enabled = true; }
         if (collision.CompareTag("Player"))
         {
             playerManager.playerInteract.SetInDialogueTrigger(true);
@@ -50,9 +51,22 @@ public class DialogueTrigger : MonoBehaviour
                 gameObject.GetComponentInChildren<Renderer>().sharedMaterial.SetFloat("_OutlineThickness", 0);
             }
             playerManager.playerInteract.SetInDialogueTrigger(false);
+            if(TryGetComponent(out Memory memory)) { return; }
+            if (gameObject.name == "DoorTrigger" || gameObject.name =="DoorTrigger (1)") { return; }
+            if (gameObject.name == "NPCBird") { return; }
             playerManager.playerInteract.SetDialogueTrigger(null);
+            //StartCoroutine(DelayNullTrigger());
         }
             
     }
 
+    IEnumerator DelayNullTrigger()
+    {
+        yield return new WaitForSeconds(1f);
+        if(playerManager.playerInteract.dialogueTrigger != null) 
+        {
+            
+        }
+        
+    }
 }

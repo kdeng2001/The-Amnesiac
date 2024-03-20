@@ -2,16 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class LevelEventsManager : MonoBehaviour
 {
     public static LevelEventsManager Instance;
+    public int level { get; private set; }
+    public bool canGlide = false;
+    public bool finishedBirdDialogue = false;
     
 
     private void Awake()
     {
         if (LevelEventsManager.Instance != null) { Destroy(gameObject); return; }
         else { Instance = this; }
+        level = SceneManager.GetActiveScene().buildIndex;
+        if(level != 2 || finishedBirdDialogue) { canGlide = true; }
     }
 
     public event Action onMemoryShardFound;
@@ -30,5 +35,14 @@ public class LevelEventsManager : MonoBehaviour
     public void Interact()
     {
         if(onInteract != null) { onInteract(); }
+    }
+
+    /// <summary>
+    /// Finish tutorial level bird dialogue
+    /// </summary>
+    public event Action onFinishBirdDialogue;
+    public void FinishBirdDialogue()
+    {
+        if(onFinishBirdDialogue != null) { onFinishBirdDialogue(); canGlide = true; }
     }
 }
