@@ -53,6 +53,7 @@ public class DialogueTrigger : MonoBehaviour
             playerManager.playerInteract.SetInDialogueTrigger(false);
             if(TryGetComponent(out Memory memory)) { return; }
             if (gameObject.name == "DoorTrigger" || gameObject.name =="DoorTrigger (1)") { return; }
+            if (gameObject.name == "NPCBird") { return; }
             playerManager.playerInteract.SetDialogueTrigger(null);
             //StartCoroutine(DelayNullTrigger());
         }
