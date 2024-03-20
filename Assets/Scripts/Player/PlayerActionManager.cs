@@ -41,11 +41,9 @@ public class PlayerActionManager : MonoBehaviour
             glideAction.canceled += context => SetGlide(context.ReadValueAsButton());
         }
         InputAction interactAction = input.actions["interact"];
-        if(interactAction != null)
+        if (interactAction != null)
         {
             interactAction.canceled += context => OnInteractStart(context);
-            //interactAction.started += context => SetInteract(interactAction.WasPressedThisFrame());
-            //interactAction.performed += context => SetInteract(interactAction.WasPressedThisFrame());
         }
     }
 
@@ -72,8 +70,6 @@ public class PlayerActionManager : MonoBehaviour
         if (interactAction != null)
         {
             interactAction.canceled -= context => OnInteractStart(context);
-            //interactAction.started -= context => SetInteract(interactAction.WasPressedThisFrame());
-            //interactAction.performed -= context => SetInteract(interactAction.WasPressedThisFrame());
         }
     }
 

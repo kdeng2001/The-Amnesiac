@@ -24,7 +24,7 @@ public class PlayerGlide : MonoBehaviour
     /// current effectiveness of glide
     /// </summary>
     float currentBirdPower;
-    private void Start()
+    private void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
         playerActionManager = GetComponent<PlayerActionManager>();

@@ -8,6 +8,7 @@ public abstract class ConditionalDialogueTrigger : MonoBehaviour
     public int useIndex { get; private set; }
     /// <summary>
     /// Checks conditions defined in extended class
+    /// Should call SetUseIndex, which determines which DialogueTrigger is used
     /// </summary>
     public abstract void CheckCondition();
     public void SetUseIndex(int i) { useIndex = i; }

@@ -32,26 +32,34 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float birdDecreasePowerRate = 1f;
     [Tooltip("Determines duration of gliding before player begins falling normally")]
     [SerializeField] public float glideTime = 2f;
-    void Start()
+
+    public bool canGlide = false;
+    private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
-        playerMovement = GetComponent<PlayerMovement>();
-        playerJump = GetComponent<PlayerJump>();
-        playerGlide = GetComponent<PlayerGlide>();
-        playerGrounded = GetComponent<PlayerGrounded>();
-        playerAnimation = GetComponent<PlayerAnimation>();
+        playerMovement = GetComponent<PlayerMovement>(); 
+        playerJump = GetComponent<PlayerJump>();         
+        playerGlide = GetComponent<PlayerGlide>(); 
+        playerGrounded = GetComponent<PlayerGrounded>();         
+        playerAnimation = GetComponent<PlayerAnimation>();         
         playerInteract = GetComponent<PlayerInteract>();
+    }
+    void Start()
+    {
+        playerMovement.enabled = true;
+        playerJump.enabled = true;
+        playerGlide.enabled = true;
+        playerAnimation.enabled = true;
+        playerInteract.enabled = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Debug.Log(playerInteract.inConversation);
         if(playerInteract.inConversation) { playerAnimation.SetAnimationIdle(); return; }
         playerMovement.Move(speed);
         playerJump.Jump(baseJumpForce, holdJumpHeight);
-        if(LevelEventsManager.Instance.canGlide)
-            playerGlide.Glide(birdBasePower, birdDecreasePowerRate, glideTime);
+        if(canGlide) { playerGlide.Glide(birdBasePower, birdDecreasePowerRate, glideTime); }  
         playerAnimation.HandlePlayerMoveAnimation();
     }
 }

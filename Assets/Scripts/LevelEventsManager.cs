@@ -9,14 +9,20 @@ public class LevelEventsManager : MonoBehaviour
     public int level { get; private set; }
     public bool canGlide = false;
     public bool finishedBirdDialogue = false;
-    
+    PlayerManager playerManager;
 
     private void Awake()
     {
         if (LevelEventsManager.Instance != null) { Destroy(gameObject); return; }
         else { Instance = this; }
         level = SceneManager.GetActiveScene().buildIndex;
-        if(level != 2 || finishedBirdDialogue) { canGlide = true; }
+        if (GameObject.Find("Player").TryGetComponent(out PlayerManager pm) )
+        {
+            playerManager = pm;
+            playerManager.enabled = true;
+            if(level != 2 || finishedBirdDialogue) { playerManager.canGlide = true; }
+        }
+
     }
 
     public event Action onMemoryShardFound;
@@ -37,12 +43,18 @@ public class LevelEventsManager : MonoBehaviour
         if(onInteract != null) { onInteract(); }
     }
 
+
+
     /// <summary>
     /// Finish tutorial level bird dialogue
     /// </summary>
     public event Action onFinishBirdDialogue;
     public void FinishBirdDialogue()
     {
-        if(onFinishBirdDialogue != null) { onFinishBirdDialogue(); canGlide = true; }
+        if (onFinishBirdDialogue != null) 
+        { 
+            onFinishBirdDialogue(); 
+            playerManager.canGlide = true; 
+        }
     }
 }

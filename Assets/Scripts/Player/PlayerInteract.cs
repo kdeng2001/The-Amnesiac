@@ -11,21 +11,16 @@ public class PlayerInteract : MonoBehaviour
     public bool inDialogueTrigger { get; private set; }
     public DialogueTrigger dialogueTrigger { get; private set; }
     public bool inConversation { get; private set; }
-    bool setEvent = false;
-    private void Start()
+    private void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
         inDialogueTrigger = false;
         dialogueTrigger = null;
         inConversation = false;
-        
-        LevelEventsManager.Instance.onInteract += HandleInteract;
-        setEvent = true;
     }
 
     private void OnEnable()
     {
-        if (!setEvent) { return; }
         LevelEventsManager.Instance.onInteract += HandleInteract;
 
     }
@@ -37,7 +32,6 @@ public class PlayerInteract : MonoBehaviour
     public void HandleInteract()
     {
         // Player initiates conversation
-        Debug.Log("is null dialogueTrigger: "+(dialogueTrigger.conversation == null));
         if(inDialogueTrigger && (dialogueTrigger.conversation.InStart() || dialogueTrigger.conversation.InMiddle())) 
         {
             playerManager.playerRB.velocity = Physics2D.gravity;

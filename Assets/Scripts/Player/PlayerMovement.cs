@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float baseDownVelocity = -.1f; 
     float downVelocity = 0;
 
-    void Start()
+    void Awake()
     {
         playerActionManager = GetComponent<PlayerActionManager>();
         rb = GetComponent<Rigidbody2D>();

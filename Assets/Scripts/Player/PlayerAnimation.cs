@@ -10,7 +10,7 @@ public class PlayerAnimation : MonoBehaviour
     string currentAnimation = "PlayerIdle";
     string[] directions = { "Left", "Right" };
     string currentDirection = "Right";
-    void Start()
+    void Awake()
     {
         playerActionManager = GetComponent<PlayerActionManager>();
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -21,7 +21,6 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (currentAnimation == newAnimation) { return; }
         currentAnimation = newAnimation;
-        //Debug.Log("Play " + currentAnimation);
         playerAnimator.Play(currentAnimation);
     }
 

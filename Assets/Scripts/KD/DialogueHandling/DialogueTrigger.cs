@@ -12,8 +12,8 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] public bool collisionTrigger;
     [Tooltip("The conversation that starts when triggered.")]
     [SerializeField] public Conversation conversation;
-    [SerializeField] public bool ally;
-    [SerializeField] float highlight = 0.2f;
+    [SerializeField] public bool outline;
+    [SerializeField] float outlineThickness = 0.2f;
     private void Start()
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
@@ -24,11 +24,8 @@ public class DialogueTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerManager.playerInteract.SetInDialogueTrigger(true);
-            playerManager.playerInteract.SetDialogueTrigger(this);               
-            if(ally)
-            {
-                gameObject.GetComponentInChildren<Renderer>().sharedMaterial.SetFloat("_OutlineThickness", highlight);
-            }
+            playerManager.playerInteract.SetDialogueTrigger(this);
+            if (outline) { GiveOutlineToNPC(); }
             if(collisionTrigger) 
             {
  
@@ -45,28 +42,25 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (ally)
-            {
-                Debug.Log(gameObject.GetComponentInChildren<Renderer>());
-                gameObject.GetComponentInChildren<Renderer>().sharedMaterial.SetFloat("_OutlineThickness", 0);
-            }
+            if (outline) { RemoveOutlineFromNPC(); }
             playerManager.playerInteract.SetInDialogueTrigger(false);
             if(TryGetComponent(out Memory memory)) { return; }
             if (gameObject.name == "DoorTrigger" || gameObject.name =="DoorTrigger (1)") { return; }
             if (gameObject.name == "NPCBird") { return; }
             playerManager.playerInteract.SetDialogueTrigger(null);
-            //StartCoroutine(DelayNullTrigger());
         }
-            
     }
 
-    IEnumerator DelayNullTrigger()
+    private void GiveOutlineToNPC()
     {
-        yield return new WaitForSeconds(1f);
-        if(playerManager.playerInteract.dialogueTrigger != null) 
-        {
-            
-        }
-        
+        gameObject.GetComponentInChildren<Renderer>()
+            .sharedMaterial.SetFloat("_OutlineThickness", outlineThickness);
+    }
+
+    private void RemoveOutlineFromNPC()
+    {
+        Debug.Log(gameObject.GetComponentInChildren<Renderer>());
+        gameObject.GetComponentInChildren<Renderer>()
+        .sharedMaterial.SetFloat("_OutlineThickness", 0);
     }
 }

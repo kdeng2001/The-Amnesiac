@@ -20,7 +20,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(playerInteract.inConversation) { return; }
+        if (playerInteract.enabled && playerInteract.inConversation) { return; }
         //Moving to the desired position
         if (waypointIndex < waypoints.Length)
         {

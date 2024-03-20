@@ -16,7 +16,7 @@ public class PlayerJump : MonoBehaviour
     float maxHoldTime = .1f;
 
 
-    void Start()
+    void Awake()
     {
         playerActionManager = GetComponent<PlayerActionManager>();
         playerManager = GetComponent<PlayerManager>();
