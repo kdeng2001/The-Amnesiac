@@ -3341,7 +3341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8147313909079523881, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.243484
+      value: 12.7434845
       objectReference: {fileID: 0}
     - target: {fileID: 8147313909079523881, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4418,7 +4418,7 @@ Transform:
   m_GameObject: {fileID: 602172250}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.70710653, w: 0.7071071}
-  m_LocalPosition: {x: 163.13666, y: -299.13736, z: 8.524586}
+  m_LocalPosition: {x: 158.63666, y: -299.13736, z: 8.524586}
   m_LocalScale: {x: 55, y: 155.4948, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5621,8 +5621,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionTrigger: 1
   conversation: {fileID: 427068126}
-  ally: 0
-  highlight: 0.2
+  outline: 0
+  outlineThickness: 0.2
 --- !u!1 &787552232
 GameObject:
   m_ObjectHideFlags: 0
@@ -13217,8 +13217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionTrigger: 1
   conversation: {fileID: 2056206324}
-  ally: 0
-  highlight: 0.2
+  outline: 0
+  outlineThickness: 0.2
 --- !u!1 &2105554922
 GameObject:
   m_ObjectHideFlags: 0
