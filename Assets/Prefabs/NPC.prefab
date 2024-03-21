@@ -186,7 +186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionTrigger: 0
   conversation: {fileID: 0}
-  ally: 0
+  outline: 1
+  outlineThickness: 0.2
 --- !u!61 &5629359398162811628
 BoxCollider2D:
   m_ObjectHideFlags: 0

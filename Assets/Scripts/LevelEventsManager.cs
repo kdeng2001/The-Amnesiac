@@ -25,6 +25,21 @@ public class LevelEventsManager : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        onPauseActivity += playerManager.PausePlayerActivity;
+        onUnPauseActivity += playerManager.UnPausePlayerActivity;
+ 
+    }
+
+    private void OnDisable()
+    {
+        onPauseActivity -= playerManager.PausePlayerActivity;
+        onUnPauseActivity -= playerManager.UnPausePlayerActivity;
+ 
+    }
+
+
     public event Action onMemoryShardFound;
     public void MemoryShardFound()
     {
@@ -41,6 +56,18 @@ public class LevelEventsManager : MonoBehaviour
     public void Interact()
     {
         if(onInteract != null) { onInteract(); }
+    }
+
+    public event Action onPauseActivity;
+    public void PauseActivity()
+    {
+        if(onPauseActivity != null) { onPauseActivity(); }
+    }
+
+    public event Action onUnPauseActivity;
+    public void UnPauseActivity()
+    {
+        if (onUnPauseActivity != null) { onUnPauseActivity(); }
     }
 
 

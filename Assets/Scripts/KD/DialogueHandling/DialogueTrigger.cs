@@ -20,34 +20,19 @@ public class DialogueTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if(TryGetComponent(out NPC npc)) { npc.enabled = true; }
-        if (collision.CompareTag("Player"))
+        if(collision.CompareTag("Player"))
         {
-            playerManager.playerInteract.SetInDialogueTrigger(true);
-            playerManager.playerInteract.SetDialogueTrigger(this);
-            if (outline) { GiveOutlineToNPC(); }
-            if(collisionTrigger) 
-            {
- 
-                conversation.StartConversation();
-                // freezes player until dialogue is finished
-                playerManager.playerInteract.SetInConversation(true);
-                playerManager.playerRB.velocity = Physics2D.gravity;
-            }
+            if(outline) { GiveOutlineToNPC(); }
+            conversation.enabled = true;
         }
-            
       
     }
     private void OnTriggerExit2D(Collider2D collision) 
     {
-        if (collision.CompareTag("Player"))
+        if(collision.CompareTag("Player"))
         {
-            if (outline) { RemoveOutlineFromNPC(); }
-            playerManager.playerInteract.SetInDialogueTrigger(false);
-            if(TryGetComponent(out Memory memory)) { return; }
-            if (gameObject.name == "DoorTrigger" || gameObject.name =="DoorTrigger (1)") { return; }
-            if (gameObject.name == "NPCBird") { return; }
-            playerManager.playerInteract.SetDialogueTrigger(null);
+            if(outline) { RemoveOutlineFromNPC(); }
+            conversation.enabled = false;
         }
     }
 

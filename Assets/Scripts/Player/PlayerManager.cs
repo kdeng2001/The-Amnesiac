@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float glideTime = 2f;
 
     public bool canGlide = false;
+    private bool pauseActivity = false;
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
@@ -44,6 +45,16 @@ public class PlayerManager : MonoBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();         
         playerInteract = GetComponent<PlayerInteract>();
     }
+
+    private void OnEnable()
+    {
+        //LevelEventsManager.Instance.onPauseActivity += HandlePauseActivity;
+    }
+    private void OnDisable()
+    {
+        
+    }
+
     void Start()
     {
         playerMovement.enabled = true;
@@ -56,10 +67,21 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(playerInteract.inConversation) { playerAnimation.SetAnimationIdle(); return; }
         playerMovement.Move(speed);
         playerJump.Jump(baseJumpForce, holdJumpHeight);
         if(canGlide) { playerGlide.Glide(birdBasePower, birdDecreasePowerRate, glideTime); }  
         playerAnimation.HandlePlayerMoveAnimation();
     }
+
+    public void PausePlayerActivity() { HandlePauseActivity(); enabled = false; }
+    public void UnPausePlayerActivity() { enabled = true; }
+
+    public void HandlePauseActivity()
+    {
+        playerAnimation.SetAnimation("PlayerIdle");
+        playerAnimation.SetDirection(playerAnimation.currentDirection);
+        playerRB.velocity = Physics2D.gravity;
+        //pauseActivity = true;
+    }
+
 }

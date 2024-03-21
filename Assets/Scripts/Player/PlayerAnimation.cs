@@ -7,9 +7,9 @@ public class PlayerAnimation : MonoBehaviour
     PlayerActionManager playerActionManager;
     SpriteRenderer sprite;
     Animator playerAnimator;
-    string currentAnimation = "PlayerIdle";
+    public string currentAnimation = "PlayerIdle";
     string[] directions = { "Left", "Right" };
-    string currentDirection = "Right";
+    public string currentDirection = "Right";
     void Awake()
     {
         playerActionManager = GetComponent<PlayerActionManager>();
@@ -23,6 +23,14 @@ public class PlayerAnimation : MonoBehaviour
         currentAnimation = newAnimation;
         playerAnimator.Play(currentAnimation);
     }
+
+    public void SetDirection(string direction) 
+    { 
+        currentDirection = direction; 
+        if(direction == "Right") { sprite.flipX = false; }
+        else { sprite.flipX = true; }
+    }
+    public void SetAnimation(string animation) { playerAnimator.Play(animation); }
 
     public void HandlePlayerMoveAnimation()
     {

@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    public virtual void DisableTrigger()
-    {
-        if(TryGetComponent(out BoxCollider2D collider))
-        {
-            collider.enabled = false;
-            //this.enabled = false;
-        }
-            
+    [SerializeField] bool interactable = true;
+    [SerializeField] bool repeatsDialogue = true;
+    [SerializeField] bool despawnsAfterInteract = false;
 
-    }
+    bool finishedDialogue = false;
+    public virtual void Move(Vector2 position) { }
 }

@@ -10,81 +10,33 @@ using UnityEngine;
 public class Conversation : MonoBehaviour
 {
     [Tooltip("All dialogues in the conversation, in order from start to end.")]
-    [SerializeField] Dialogue[] dialogueList;
-    [SerializeField] bool specialDialogue;
+    [SerializeField] public Dialogue[] dialogueList;
+    [SerializeField] public bool oneTimeConversation = false;
+    public bool hasStarted { get; private set; }
+    public bool hasEnded { get; private set; }
 
-    bool start = true;
-    bool middle = false;
-    bool end = false;
-    int currentPosition = 0;
-
-    public virtual void StartSpecialDialogue() { }
-    public virtual void HandleSpecialDialogue() { }
-    public virtual void EndSpecialDialogue() { }
-    public void HandleConversation()
+    private void Awake()
     {
-        if(start && currentPosition==0) { StartConversation(); }
-        else { NextDialogue(); }
+        hasStarted = false;
+        hasEnded = false;
     }
 
-    /// <summary>
-    /// starts conversation
-    /// </summary>
-    public void StartConversation() 
+    private void OnEnable()
     {
-        PauseActivity();
-        currentPosition = 0;
-        start = false;
-        middle = true;
-        end = false;
-        if (specialDialogue) { StartSpecialDialogue(); }
-        dialogueList[currentPosition].StartDialogue();
+        //if(enabled) { return; }
+        Debug.Log("enabled conversation");
+        ConversationManager.onSetCurrentConversation?.Invoke(this);
         
-
+        
     }
-    /// <summary>
-    /// moves conversation forward
-    /// </summary>
-    public void NextDialogue() 
+
+    private void OnDisable()
     {
-
-        dialogueList[currentPosition].EndDialogue();
-        // reach end of dialogue, or start next dialogue
-        HandleSpecialDialogue();
-        if (++currentPosition >= dialogueList.Length)
-        {
-            Debug.Log("EndConversation");
-            EndConversation();
-            return;
-        }
-        else { dialogueList[currentPosition].StartDialogue(); }
-    }
-    /// <summary>
-    /// ends the conversation
-    /// </summary>
-    public void EndConversation()
-    {
-        currentPosition = 0;
-        start = true;
-        middle = false;
-        end = true;
-        UnPauseActivity();
-        if(specialDialogue) { EndSpecialDialogue(); }
-    }
-    public bool InStart() { return start; }
-    public bool InMiddle() { return middle; }
-    public bool InEnd() { return end; }
-    public int GetCurrentPosition() { return currentPosition; }
-    /// <summary>
-    /// pauses movement of players, platforms, etc... while dialogue is happening
-    /// </summary>
-    public void PauseActivity()
-    {
-
+        ConversationManager.onSetCurrentConversation?.Invoke(null);
     }
 
-    public void UnPauseActivity()
-    {
+    public void SetStart() { hasStarted = true; }
+    public void SetEnd() { hasEnded = true; }
 
-    }
+
 }

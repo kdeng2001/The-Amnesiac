@@ -948,6 +948,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1899975666}
     m_Modifications:
+    - target: {fileID: 2974019637438332210, guid: 8566b9352880b9641b258f28a64eeaf5, type: 3}
+      propertyPath: conversation
+      value: 
+      objectReference: {fileID: 1304790340}
     - target: {fileID: 3516758395338393685, guid: 8566b9352880b9641b258f28a64eeaf5, type: 3}
       propertyPath: MemoryNumber
       value: 2
@@ -3635,6 +3639,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1899975666}
     m_Modifications:
+    - target: {fileID: 2974019637438332210, guid: 8566b9352880b9641b258f28a64eeaf5, type: 3}
+      propertyPath: conversation
+      value: 
+      objectReference: {fileID: 1100926442}
     - target: {fileID: 3516758395338393685, guid: 8566b9352880b9641b258f28a64eeaf5, type: 3}
       propertyPath: MemoryNumber
       value: 0
@@ -3736,14 +3744,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427068124}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a7242e8eb1eae0458fc329ead4500e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueList:
   - {fileID: 811951541}
-  specialDialogue: 0
+  oneTimeConversation: 0
 --- !u!1 &435236963
 GameObject:
   m_ObjectHideFlags: 0
@@ -4178,7 +4186,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571410886}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a7242e8eb1eae0458fc329ead4500e4, type: 3}
   m_Name: 
@@ -4186,7 +4194,7 @@ MonoBehaviour:
   dialogueList:
   - {fileID: 1781795271}
   - {fileID: 331563938}
-  specialDialogue: 0
+  oneTimeConversation: 0
 --- !u!4 &571410888
 Transform:
   m_ObjectHideFlags: 0
@@ -4691,14 +4699,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630015079}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a7242e8eb1eae0458fc329ead4500e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueList:
   - {fileID: 1787935434}
-  specialDialogue: 0
+  oneTimeConversation: 0
 --- !u!4 &651772152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3541512780308944433, guid: 4adb0a18764eec94e8a5779b68652f4a, type: 3}
@@ -6943,14 +6951,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100926440}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a7242e8eb1eae0458fc329ead4500e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueList:
   - {fileID: 1597941421}
-  specialDialogue: 0
+  oneTimeConversation: 0
 --- !u!1 &1124405292
 GameObject:
   m_ObjectHideFlags: 0
@@ -7276,14 +7284,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304790338}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a7242e8eb1eae0458fc329ead4500e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueList:
   - {fileID: 2005862204}
-  specialDialogue: 0
+  oneTimeConversation: 0
 --- !u!1 &1368541635
 GameObject:
   m_ObjectHideFlags: 0
@@ -7595,7 +7603,7 @@ MonoBehaviour:
   - {fileID: 1808906968}
   - {fileID: 760106508}
   - {fileID: 1167396782}
-  specialDialogue: 0
+  oneTimeConversation: 0
 --- !u!1 &1384675386
 GameObject:
   m_ObjectHideFlags: 0
@@ -7826,6 +7834,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ed8977f897a4643a665a15a3b44cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
+  repeatsDialogue: 1
+  despawnsAfterInteract: 0
 --- !u!4 &1401904739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8371341125946371205, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
@@ -10701,7 +10712,7 @@ MonoBehaviour:
   - {fileID: 1421543099}
   - {fileID: 122443803}
   - {fileID: 1301431548}
-  specialDialogue: 1
+  oneTimeConversation: 0
 --- !u!4 &1681597141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7169778766287831942, guid: 8566b9352880b9641b258f28a64eeaf5, type: 3}
@@ -12154,6 +12165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4eb05c6f7bfb4418d263c105525c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentConversation: {fileID: 0}
 --- !u!1001 &2024564553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12901,7 +12913,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056206322}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a7242e8eb1eae0458fc329ead4500e4, type: 3}
   m_Name: 
@@ -12911,7 +12923,7 @@ MonoBehaviour:
   - {fileID: 673876867}
   - {fileID: 1257492794}
   - {fileID: 750752867}
-  specialDialogue: 0
+  oneTimeConversation: 0
 --- !u!1 &2062582792
 GameObject:
   m_ObjectHideFlags: 0
@@ -14149,6 +14161,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1899975666}
     m_Modifications:
+    - target: {fileID: 2974019637438332210, guid: 8566b9352880b9641b258f28a64eeaf5, type: 3}
+      propertyPath: conversation
+      value: 
+      objectReference: {fileID: 630015081}
     - target: {fileID: 3516758395338393685, guid: 8566b9352880b9641b258f28a64eeaf5, type: 3}
       propertyPath: MemoryNumber
       value: 1
