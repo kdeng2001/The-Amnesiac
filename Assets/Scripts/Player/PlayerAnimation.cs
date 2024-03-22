@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     PlayerActionManager playerActionManager;
+    PlayerManager playerManager;
     SpriteRenderer sprite;
     Animator playerAnimator;
     public string currentAnimation = "PlayerIdle";
@@ -13,6 +14,7 @@ public class PlayerAnimation : MonoBehaviour
     void Awake()
     {
         playerActionManager = GetComponent<PlayerActionManager>();
+        playerManager = GetComponent<PlayerManager>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         playerAnimator = GetComponentInChildren<Animator>();
     }

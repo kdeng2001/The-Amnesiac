@@ -23,13 +23,14 @@ public class PlayerJump : MonoBehaviour
         playerActionManager = GetComponent<PlayerActionManager>();
         playerManager = GetComponent<PlayerManager>();
         rb = GetComponent<Rigidbody2D>();
-        LevelEventsManager.Instance.onJumpCancel += JumpCancel;
+        if(playerManager.jumpCancel) {  LevelEventsManager.Instance.onJumpCancel += JumpCancel; }
+       
     }
 
     /// <summary>
     /// Called every frame to handle Jump behavior
     /// </summary>
-    public void Jump(float baseJumpForce, float holdJumpHeight)
+    public void Jump(float baseJumpForce, float holdJumpForce)
     {
         if(rb.velocity.y < 0) { falling = true; }
         else { falling = false; }
@@ -47,7 +48,7 @@ public class PlayerJump : MonoBehaviour
         }
         else if(jumping && elapseTime < maxHoldTime && !playerManager.playerGrounded.IsGrounded())
         {
-            rb.AddForce(Vector2.up * (holdJumpHeight - elapseTime * 10) * 100);
+            rb.AddForce(Vector2.up * (holdJumpForce - elapseTime * 10) * 100);
             elapseTime += Time.deltaTime;
         }
         
@@ -55,10 +56,18 @@ public class PlayerJump : MonoBehaviour
     
     private void JumpCancel()
     {
+        if(!playerManager.jumpCancel) { return; }
         if(!falling)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
+            StartCoroutine(delayJumpCancel());
         }
 
+    }
+
+    public IEnumerator delayJumpCancel()
+    {
+        yield return new WaitForSeconds(playerManager.delayJumpCancelTime);
+        if(rb.velocity.y > 0) { rb.velocity = new Vector2(rb.velocity.x, 0); }
+        
     }
 }

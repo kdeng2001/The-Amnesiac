@@ -22,7 +22,12 @@ public class PlayerManager : MonoBehaviour
     [Tooltip("Determines jump height without hold")]
     [SerializeField] public float baseJumpForce = 5f;
     [Tooltip("Determines jump height from holding")]
-    [SerializeField] public float holdJumpHeight = 15f;
+    [SerializeField] public float holdJumpForce = 15f;
+    [Tooltip("Causes player to fall earlier when jump is released")]
+    [SerializeField] public bool jumpCancel = true;
+    [Tooltip("Determines time elapsed before jump actually cancels")]
+    [SerializeField] public float delayJumpCancelTime = 0.5f;
+
     /// <summary>
     /// playerGlide depends on birdBasePower, birdDecreasePowerRate, glideTime
     /// </summary>
@@ -68,7 +73,7 @@ public class PlayerManager : MonoBehaviour
     void FixedUpdate()
     {
         playerMovement.Move(speed);
-        playerJump.Jump(baseJumpForce, holdJumpHeight);
+        playerJump.Jump(baseJumpForce, holdJumpForce);
         if(canGlide) { playerGlide.Glide(birdBasePower, birdDecreasePowerRate, glideTime); }  
         playerAnimation.HandlePlayerMoveAnimation();
     }
