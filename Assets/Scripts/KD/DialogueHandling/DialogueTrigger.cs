@@ -8,65 +8,51 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     PlayerManager playerManager;
-    [Tooltip("Determines if dialogue starts from a collision or player interaction.")]
-    [SerializeField] public bool collisionTrigger;
     [Tooltip("The conversation that starts when triggered.")]
     [SerializeField] public Conversation conversation;
-    [SerializeField] public bool ally;
-    [SerializeField] float highlight = 0.2f;
+    [SerializeField] public bool outline;
+    [SerializeField] float outlineThickness = 0.2f;
     private void Start()
     {
         playerManager = GameObject.Find("Player").GetComponent<PlayerManager>();
     }
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if(TryGetComponent(out NPC npc)) { npc.enabled = true; }
-        if (collision.CompareTag("Player"))
+        if(collision.CompareTag("Player"))
         {
-            playerManager.playerInteract.SetInDialogueTrigger(true);
-            playerManager.playerInteract.SetDialogueTrigger(this);               
-            if(ally)
-            {
-                gameObject.GetComponentInChildren<Renderer>().sharedMaterial.SetFloat("_OutlineThickness", highlight);
-            }
-            if(collisionTrigger) 
-            {
- 
-                conversation.StartConversation();
-                // freezes player until dialogue is finished
-                playerManager.playerInteract.SetInConversation(true);
-                playerManager.playerRB.velocity = Physics2D.gravity;
-            }
-        }
-            
-      
-    }
-    private void OnTriggerExit2D(Collider2D collision) 
-    {
-        if (collision.CompareTag("Player"))
-        {
-            if (ally)
-            {
-                Debug.Log(gameObject.GetComponentInChildren<Renderer>());
-                gameObject.GetComponentInChildren<Renderer>().sharedMaterial.SetFloat("_OutlineThickness", 0);
-            }
-            playerManager.playerInteract.SetInDialogueTrigger(false);
-            if(TryGetComponent(out Memory memory)) { return; }
-            if (gameObject.name == "DoorTrigger" || gameObject.name =="DoorTrigger (1)") { return; }
-            if (gameObject.name == "NPCBird") { return; }
-            playerManager.playerInteract.SetDialogueTrigger(null);
-            //StartCoroutine(DelayNullTrigger());
-        }
-            
+            Debug.Log("Conversation trigger enter: " + conversation.name);
+            if(outline) { GiveOutlineToNPC(); }
+            conversation.enabled = true;
+        } 
     }
 
-    IEnumerator DelayNullTrigger()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        yield return new WaitForSeconds(1f);
-        if(playerManager.playerInteract.dialogueTrigger != null) 
+        if(conversation.oneTimeConversation) { return; }
+        if(conversation.collisionTrigger) { return; }
+        if(!conversation.enabled) { conversation.enabled = true; }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) 
+    {
+        if(collision.CompareTag("Player"))
         {
-            
+            if(outline) { RemoveOutlineFromNPC(); }
+            Debug.Log("Conversation trigger exit: " + (conversation==null));
+            conversation.enabled = false;
         }
-        
+    }
+
+    private void GiveOutlineToNPC()
+    {
+        transform.parent.gameObject.GetComponentInChildren<Renderer>()
+            .sharedMaterial.SetFloat("_OutlineThickness", outlineThickness);
+    }
+
+    private void RemoveOutlineFromNPC()
+    {
+        Debug.Log(gameObject.GetComponentInChildren<Renderer>());
+        transform.parent.gameObject.GetComponentInChildren<Renderer>()
+        .sharedMaterial.SetFloat("_OutlineThickness", 0);
     }
 }

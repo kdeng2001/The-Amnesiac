@@ -35,7 +35,7 @@ public class MemoryManager : MonoBehaviour
 
     public void FoundMemoryShard(int shardNumber, GameObject memory)
     {
-        Debug.Log("Player Collects Memory");
+        //Debug.Log("Player Collects Memory");
         if(memory.TryGetComponent(out SpriteRenderer sprite))
         {
             memoryUI[shardNumber].color = sprite.color;

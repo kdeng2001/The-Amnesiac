@@ -22,7 +22,12 @@ public class PlayerManager : MonoBehaviour
     [Tooltip("Determines jump height without hold")]
     [SerializeField] public float baseJumpForce = 5f;
     [Tooltip("Determines jump height from holding")]
-    [SerializeField] public float holdJumpHeight = 15f;
+    [SerializeField] public float holdJumpForce = 15f;
+    [Tooltip("Causes player to fall earlier when jump is released")]
+    [SerializeField] public bool jumpCancel = true;
+    [Tooltip("Determines time elapsed before jump actually cancels")]
+    [SerializeField] public float delayJumpCancelTime = 0.5f;
+
     /// <summary>
     /// playerGlide depends on birdBasePower, birdDecreasePowerRate, glideTime
     /// </summary>
@@ -32,26 +37,56 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public float birdDecreasePowerRate = 1f;
     [Tooltip("Determines duration of gliding before player begins falling normally")]
     [SerializeField] public float glideTime = 2f;
-    void Start()
+
+    public bool canGlide = false;
+    private bool pauseActivity = false;
+    private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
-        playerMovement = GetComponent<PlayerMovement>();
-        playerJump = GetComponent<PlayerJump>();
-        playerGlide = GetComponent<PlayerGlide>();
-        playerGrounded = GetComponent<PlayerGrounded>();
-        playerAnimation = GetComponent<PlayerAnimation>();
+        playerMovement = GetComponent<PlayerMovement>(); 
+        playerJump = GetComponent<PlayerJump>();         
+        playerGlide = GetComponent<PlayerGlide>(); 
+        playerGrounded = GetComponent<PlayerGrounded>();         
+        playerAnimation = GetComponent<PlayerAnimation>();         
         playerInteract = GetComponent<PlayerInteract>();
+    }
+
+    private void OnEnable()
+    {
+        //LevelEventsManager.Instance.onPauseActivity += HandlePauseActivity;
+    }
+    private void OnDisable()
+    {
+        
+    }
+
+    void Start()
+    {
+        playerMovement.enabled = true;
+        playerJump.enabled = true;
+        playerGlide.enabled = true;
+        playerAnimation.enabled = true;
+        playerInteract.enabled = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Debug.Log(playerInteract.inConversation);
-        if(playerInteract.inConversation) { playerAnimation.SetAnimationIdle(); return; }
         playerMovement.Move(speed);
-        playerJump.Jump(baseJumpForce, holdJumpHeight);
-        if(LevelEventsManager.Instance.canGlide)
-            playerGlide.Glide(birdBasePower, birdDecreasePowerRate, glideTime);
+        playerJump.Jump(baseJumpForce, holdJumpForce);
+        if(canGlide) { playerGlide.Glide(birdBasePower, birdDecreasePowerRate, glideTime); }  
         playerAnimation.HandlePlayerMoveAnimation();
     }
+
+    public void PausePlayerActivity() { HandlePauseActivity(); enabled = false; }
+    public void UnPausePlayerActivity() { enabled = true; }
+
+    public void HandlePauseActivity()
+    {
+        playerAnimation.SetAnimation("PlayerIdle");
+        playerAnimation.SetDirection(playerAnimation.currentDirection);
+        playerRB.velocity = Physics2D.gravity;
+        //pauseActivity = true;
+    }
+
 }

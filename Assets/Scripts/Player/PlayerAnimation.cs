@@ -5,14 +5,16 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     PlayerActionManager playerActionManager;
+    PlayerManager playerManager;
     SpriteRenderer sprite;
     Animator playerAnimator;
-    string currentAnimation = "PlayerIdle";
+    public string currentAnimation = "PlayerIdle";
     string[] directions = { "Left", "Right" };
-    string currentDirection = "Right";
-    void Start()
+    public string currentDirection = "Right";
+    void Awake()
     {
         playerActionManager = GetComponent<PlayerActionManager>();
+        playerManager = GetComponent<PlayerManager>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         playerAnimator = GetComponentInChildren<Animator>();
     }
@@ -21,9 +23,16 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (currentAnimation == newAnimation) { return; }
         currentAnimation = newAnimation;
-        //Debug.Log("Play " + currentAnimation);
         playerAnimator.Play(currentAnimation);
     }
+
+    public void SetDirection(string direction) 
+    { 
+        currentDirection = direction; 
+        if(direction == "Right") { sprite.flipX = false; }
+        else { sprite.flipX = true; }
+    }
+    public void SetAnimation(string animation) { playerAnimator.Play(animation); }
 
     public void HandlePlayerMoveAnimation()
     {

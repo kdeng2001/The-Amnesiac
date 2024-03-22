@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7169778766287831942}
   - component: {fileID: 3516758395338393685}
   - component: {fileID: 8184798028050381430}
-  - component: {fileID: 7816221270605152892}
   - component: {fileID: 726252503280959710}
+  - component: {fileID: 2974019637438332210}
   m_Layer: 7
-  m_Name: Memory
+  m_Name: memory
   m_TagString: MemoryShard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,20 +97,6 @@ PolygonCollider2D:
       - {x: 0, y: -0.25}
       - {x: 0.5, y: 0}
   m_UseDelaunayMesh: 0
---- !u!114 &7816221270605152892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6135078752283286363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a405eb2160093542bffae9a300da510, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionTrigger: 1
-  conversation: {fileID: 0}
 --- !u!212 &726252503280959710
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -163,3 +149,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2974019637438332210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6135078752283286363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a405eb2160093542bffae9a300da510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionTrigger: 1
+  conversation: {fileID: 0}
+  outline: 0
+  outlineThickness: 0.2

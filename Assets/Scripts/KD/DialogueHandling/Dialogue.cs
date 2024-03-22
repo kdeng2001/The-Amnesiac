@@ -13,21 +13,27 @@ public class Dialogue : MonoBehaviour
     [SerializeField] GameObject speaker;
     [Tooltip("The Transform that dialogue will come from (mouth?)")]
     [SerializeField] Transform speakPosition;
+    [SerializeField] public float minAliveTime = 0;
+    Transform parentOG;
 
-    private void Start()
+    private void Awake()
     {
         gameObject.SetActive(false);
+        
     }
 
     public void StartDialogue()
     {
+        parentOG = transform.parent;
         transform.SetParent(speakPosition);
         transform.localPosition = Vector3.zero;
         gameObject.SetActive(true);
     }
     public void EndDialogue()
     {
-        transform.SetParent(DialogueManager.Instance.transform);
+        transform.SetParent(ConversationManager.Instance.transform);
+        transform.parent = parentOG;
+        //Debug.Log("End dialogue: " + gameObject.name);
         gameObject.SetActive(false);
     }
 }

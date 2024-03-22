@@ -8,6 +8,11 @@ public class PlayerGlide : MonoBehaviour
     PlayerActionManager playerActionManager;
     Rigidbody2D rb;
 
+    public delegate void GlidingStart();
+    public static GlidingStart glidingStart;
+    public delegate void GlidingEnd();
+    public static GlidingEnd glidingEnd;
+
     /// <summary>
     /// is true if player has started gliding
     /// </summary>
@@ -24,7 +29,7 @@ public class PlayerGlide : MonoBehaviour
     /// current effectiveness of glide
     /// </summary>
     float currentBirdPower;
-    private void Start()
+    private void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
         playerActionManager = GetComponent<PlayerActionManager>();
@@ -37,7 +42,11 @@ public class PlayerGlide : MonoBehaviour
     public void Glide(float birdBasePower, float birdDecreasePowerRate, float glideTime)
     {
         // if grounded, prepare for glide
-        if(playerManager.playerGrounded.IsGrounded()) { glideStart = false; }
+        if(playerManager.playerGrounded.IsGrounded()) 
+        { 
+            if(glideStart) { glidingEnd?.Invoke(); }
+            glideStart = false; 
+        }
         
         
         // Handle glide
@@ -55,10 +64,15 @@ public class PlayerGlide : MonoBehaviour
                 GlideCooldown(glideTime);
             }
             // check if glide too long, else playerGlide
-            if(glideEnd) { return; }
+            if(glideEnd) 
+            {
+                glidingEnd?.Invoke();
+                return; 
+            }
             rb.velocity = new Vector2(rb.velocity.x, -1 * (currentBirdPower));
         }
     }
+
     /// <summary>
     /// sets variables that control glide
     /// </summary>
@@ -68,14 +82,15 @@ public class PlayerGlide : MonoBehaviour
         elapsedGlideTime = 0f;
         glideEnd = false;
         currentBirdPower = birdBasePower;
+        glidingStart?.Invoke();
     }
-
     /// <summary>
     /// counts time while glide is active, ends glide if enough time passes
     /// </summary>
     void GlideCooldown(float glideTime)
     {
+        if (elapsedGlideTime > glideTime) { return; }
         elapsedGlideTime += Time.deltaTime;
-        if(elapsedGlideTime > glideTime) { glideEnd = true; }
+        if(elapsedGlideTime > glideTime) { glideEnd = true; glidingEnd?.Invoke(); }
     }
 }

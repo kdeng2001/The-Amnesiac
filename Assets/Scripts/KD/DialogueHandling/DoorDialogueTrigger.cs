@@ -19,7 +19,11 @@ public class DoorDialogueTrigger : ConditionalDialogueTrigger
     {
         if(useIndex == 0)
         {
-            if(dialogueTriggers[0].conversation.InEnd()) { gameObject.SetActive(false); }
+            if(dialogueTriggers[useIndex].conversation.hasEnded) 
+            {
+                Debug.Log(dialogueTriggers[useIndex].name + " has ended");
+                gameObject.SetActive(false); 
+            }
         }
     }
 

@@ -11,7 +11,7 @@ public class PlayerGrounded : MonoBehaviour
     /// <summary>
     /// radius of ground check
     /// </summary>
-    [SerializeField] public float groundCheckRadius = 1;
+    [SerializeField] public Vector2 groundCheckDimensions = new Vector2(1,1);
     /// <summary>
     /// layers that are considered "ground"
     /// </summary>
@@ -23,12 +23,12 @@ public class PlayerGrounded : MonoBehaviour
     /// <returns></returns>
     public bool IsGrounded()
     {
-        if (Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundCheckLayerMask) == null) { return false; }
+        if (Physics2D.OverlapBox(groundCheck.position, groundCheckDimensions, 0, groundCheckLayerMask) == null) { return false; }
         return true;
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.DrawWireCube(groundCheck.position, groundCheckDimensions);
     }
 }

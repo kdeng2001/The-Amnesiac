@@ -8,53 +8,60 @@ using UnityEngine;
 public class PlayerInteract : MonoBehaviour
 {
     private PlayerManager playerManager;
-    public bool inDialogueTrigger { get; private set; }
-    public DialogueTrigger dialogueTrigger { get; private set; }
-    public bool inConversation { get; private set; }
-    bool setEvent = false;
-    private void Start()
+    private void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
-        inDialogueTrigger = false;
-        dialogueTrigger = null;
-        inConversation = false;
-        
-        LevelEventsManager.Instance.onInteract += HandleInteract;
-        setEvent = true;
     }
 
-    private void OnEnable()
-    {
-        if (!setEvent) { return; }
-        LevelEventsManager.Instance.onInteract += HandleInteract;
+    private void OnEnable() { LevelEventsManager.Instance.onInteract += HandleInteract; }
+    private void OnDisable() { LevelEventsManager.Instance.onInteract -= HandleInteract; }
+    //public delegate void OnEndConversation();
+    //OnEndConversation onEndConversation;
 
-    }
-    private void OnDisable()
-    {
-        LevelEventsManager.Instance.onInteract -= HandleInteract;
-    }
-
+    /// <summary>
+    /// Handles conversation and potentially other events that trigger when pressing interact key
+    /// </summary>
     public void HandleInteract()
     {
-        // Player initiates conversation
-        Debug.Log("is null dialogueTrigger: "+(dialogueTrigger.conversation == null));
-        if(inDialogueTrigger && (dialogueTrigger.conversation.InStart() || dialogueTrigger.conversation.InMiddle())) 
-        {
-            playerManager.playerRB.velocity = Physics2D.gravity;
-            dialogueTrigger.conversation.HandleConversation();
-            Debug.Log("is null conversation:" + (dialogueTrigger == null));
-            inConversation = dialogueTrigger.conversation.InMiddle();
-        }
-        else if(inDialogueTrigger && dialogueTrigger.conversation.InEnd()) { inConversation = dialogueTrigger.conversation.InEnd(); }
+        HandleConversation();
+    }
+    /// <summary>
+    /// Starts conversation, sets states, player cannot initiate a new conversation while one is already in progress
+    /// </summary>
+    private void InitiateConversation()
+    {
+        ConversationManager.onStartConversation?.Invoke();
+    }
+    /// <summary>
+    /// Moves the conversation forward or finishes if no more dialogue
+    /// </summary>
+    private void ContinueConversation()
+    {
+        if (ConversationManager.onContinueConversation == null) { return; }
+        bool continueConvo = ConversationManager.onContinueConversation.Invoke();
+        if(!continueConvo) { FinishConversation(); }
+    }
+    /// <summary>
+    /// Unpauses, sets state InConversation to false
+    /// </summary>
+    private void FinishConversation()
+    {
+        ConversationManager.onEndConversation?.Invoke();
+    }
+    /// <summary>
+    /// Handles conversation depending on whether the conversation is in progress or hasn't started yet
+    /// </summary>
+    private void HandleConversation()
+    {
+        // Conditions to start conversation through interact
+        if (ConversationManager.Instance.canStartConverse && !ConversationManager.Instance.inConversation) { InitiateConversation(); }
+        else if (ConversationManager.Instance.inConversation) { ContinueConversation(); }
     }
 
-    public void SetInDialogueTrigger(bool value)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        inDialogueTrigger = value;
+        if(collision.gameObject != null && collision.gameObject.TryGetComponent(out DialogueTrigger dT)) { ConversationManager.onUnSetCurrentConversation?.Invoke();  }
+        
     }
-    public void SetDialogueTrigger(DialogueTrigger dt)
-    {
-        dialogueTrigger = dt;
-    }
-    public void SetInConversation(bool value) { inConversation = value; }
+
 }

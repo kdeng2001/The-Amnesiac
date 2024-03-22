@@ -8,6 +8,7 @@ public abstract class ConditionalDialogueTrigger : MonoBehaviour
     public int useIndex { get; private set; }
     /// <summary>
     /// Checks conditions defined in extended class
+    /// Should call SetUseIndex, which determines which DialogueTrigger is used
     /// </summary>
     public abstract void CheckCondition();
     public void SetUseIndex(int i) { useIndex = i; }
@@ -15,14 +16,20 @@ public abstract class ConditionalDialogueTrigger : MonoBehaviour
     {
         for(int i=0; i<dialogueTriggers.Length; i++)
         {
-            if(i == useIndex) { dialogueTriggers[i].gameObject.SetActive(true); }
-            else { dialogueTriggers[i].gameObject.SetActive(false); }
+            if(i == useIndex) 
+            {
+                dialogueTriggers[i].conversation.enabled = true;
+                dialogueTriggers[i].gameObject.SetActive(true); 
+            }
+            else 
+            { dialogueTriggers[i].gameObject.SetActive(false); }
         }
     }
     public void DeactivateDialogueTriggers()
     {
         for (int i = 0; i < dialogueTriggers.Length; i++)
         {
+            dialogueTriggers[i].conversation.enabled = false;
            dialogueTriggers[i].gameObject.SetActive(false);
         }
     }

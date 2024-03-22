@@ -11,16 +11,23 @@ public class MovingPlatform : MonoBehaviour
 
     [SerializeField] GameObject movingPlatform;
     bool isChangingDirection;
-    PlayerInteract playerInteract;
 
-    private void Start()
-    {
-        playerInteract = GameObject.Find("Player").GetComponent<PlayerInteract>();
+    private void Awake()
+    {   
+        LevelEventsManager.Instance.onPauseActivity += PauseMove;
+        LevelEventsManager.Instance.onUnPauseActivity += UnPauseMove;
     }
+
+
+
+    //private void OnDisable()
+    //{
+    //    LevelEventsManager.Instance.onPauseActivity -= PauseMove;
+    //    LevelEventsManager.Instance.onUnPauseActivity -= UnPauseMove;
+    //}
 
     private void FixedUpdate()
     {
-        if(playerInteract.inConversation) { return; }
         //Moving to the desired position
         if (waypointIndex < waypoints.Length)
         {
@@ -57,4 +64,7 @@ public class MovingPlatform : MonoBehaviour
     {
         other.transform.SetParent(null);
     }
+
+    public void PauseMove() { enabled = false; }
+    public void UnPauseMove() { enabled = true; }
 }

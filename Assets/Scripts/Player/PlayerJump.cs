@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerJump : MonoBehaviour
 {
@@ -15,19 +16,24 @@ public class PlayerJump : MonoBehaviour
     float elapseTime = 0;
     float maxHoldTime = .1f;
 
+    bool falling;
 
-    void Start()
+    void Awake()
     {
         playerActionManager = GetComponent<PlayerActionManager>();
         playerManager = GetComponent<PlayerManager>();
         rb = GetComponent<Rigidbody2D>();
+        if(playerManager.jumpCancel) {  LevelEventsManager.Instance.onJumpCancel += JumpCancel; }
+       
     }
 
     /// <summary>
     /// Called every frame to handle Jump behavior
     /// </summary>
-    public void Jump(float baseJumpForce, float holdJumpHeight)
+    public void Jump(float baseJumpForce, float holdJumpForce)
     {
+        if(rb.velocity.y < 0) { falling = true; }
+        else { falling = false; }
         if(playerActionManager.jumpValue && playerManager.playerGrounded.IsGrounded() && !jumping)
         {   
             rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -42,9 +48,26 @@ public class PlayerJump : MonoBehaviour
         }
         else if(jumping && elapseTime < maxHoldTime && !playerManager.playerGrounded.IsGrounded())
         {
-            rb.AddForce(Vector2.up * (holdJumpHeight - elapseTime * 10) * 100);
+            rb.AddForce(Vector2.up * (holdJumpForce - elapseTime * 10) * 100);
             elapseTime += Time.deltaTime;
         }
+        
+    }
+    
+    private void JumpCancel()
+    {
+        if(!playerManager.jumpCancel) { return; }
+        if(!falling)
+        {
+            StartCoroutine(delayJumpCancel());
+        }
+
+    }
+
+    public IEnumerator delayJumpCancel()
+    {
+        yield return new WaitForSeconds(playerManager.delayJumpCancelTime);
+        if(rb.velocity.y > 0) { rb.velocity = new Vector2(rb.velocity.x, 0); }
         
     }
 }
