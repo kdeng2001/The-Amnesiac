@@ -45,14 +45,14 @@ public class DialogueTrigger : MonoBehaviour
 
     private void GiveOutlineToNPC()
     {
-        gameObject.GetComponentInChildren<Renderer>()
+        transform.parent.gameObject.GetComponentInChildren<Renderer>()
             .sharedMaterial.SetFloat("_OutlineThickness", outlineThickness);
     }
 
     private void RemoveOutlineFromNPC()
     {
         Debug.Log(gameObject.GetComponentInChildren<Renderer>());
-        gameObject.GetComponentInChildren<Renderer>()
+        transform.parent.gameObject.GetComponentInChildren<Renderer>()
         .sharedMaterial.SetFloat("_OutlineThickness", 0);
     }
 }

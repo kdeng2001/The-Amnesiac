@@ -7,6 +7,9 @@ public class BirdTutorial : Conversation
     GameObject player;
     PlayerAnimation playerAnimation;
     BirdNPC bird;
+
+    public delegate void CanFollowPlayer();
+    public static CanFollowPlayer canFollowPlayer;
     public override void OnEnable()
     {
         ConversationManager.onStartConversation += HandleStartCutScene;
@@ -48,6 +51,7 @@ public class BirdTutorial : Conversation
         //if (!ConversationManager.Instance.currentConversation == this) { return; }
         Debug.Log("end cutscene");
         player.GetComponent<PlayerManager>().canGlide = true;
+        canFollowPlayer?.Invoke();
         Debug.Log("can glide");
         enabled = false; 
     }

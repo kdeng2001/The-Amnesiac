@@ -8,6 +8,11 @@ public class PlayerGlide : MonoBehaviour
     PlayerActionManager playerActionManager;
     Rigidbody2D rb;
 
+    public delegate void GlidingStart();
+    public static GlidingStart glidingStart;
+    public delegate void GlidingEnd();
+    public static GlidingEnd glidingEnd;
+
     /// <summary>
     /// is true if player has started gliding
     /// </summary>
@@ -68,6 +73,7 @@ public class PlayerGlide : MonoBehaviour
         elapsedGlideTime = 0f;
         glideEnd = false;
         currentBirdPower = birdBasePower;
+        glidingStart?.Invoke();
     }
 
     /// <summary>
@@ -75,7 +81,8 @@ public class PlayerGlide : MonoBehaviour
     /// </summary>
     void GlideCooldown(float glideTime)
     {
+        if (elapsedGlideTime > glideTime) { return; }
         elapsedGlideTime += Time.deltaTime;
-        if(elapsedGlideTime > glideTime) { glideEnd = true; }
+        if(elapsedGlideTime > glideTime) { glideEnd = true; glidingEnd?.Invoke(); }
     }
 }
