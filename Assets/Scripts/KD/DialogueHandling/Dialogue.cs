@@ -33,7 +33,7 @@ public class Dialogue : MonoBehaviour
     {
         transform.SetParent(ConversationManager.Instance.transform);
         transform.parent = parentOG;
-        Debug.Log("End dialogue: " + gameObject.name);
+        //Debug.Log("End dialogue: " + gameObject.name);
         gameObject.SetActive(false);
     }
 }

@@ -8,8 +8,6 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     PlayerManager playerManager;
-    [Tooltip("Determines if dialogue starts from a collision or player interaction.")]
-    [SerializeField] public bool collisionTrigger;
     [Tooltip("The conversation that starts when triggered.")]
     [SerializeField] public Conversation conversation;
     [SerializeField] public bool outline;
@@ -22,16 +20,25 @@ public class DialogueTrigger : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
+            Debug.Log("Conversation trigger enter: " + conversation.name);
             if(outline) { GiveOutlineToNPC(); }
             conversation.enabled = true;
-        }
-      
+        } 
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(conversation.oneTimeConversation) { return; }
+        if(conversation.collisionTrigger) { return; }
+        if(!conversation.enabled) { conversation.enabled = true; }
+    }
+
     private void OnTriggerExit2D(Collider2D collision) 
     {
         if(collision.CompareTag("Player"))
         {
             if(outline) { RemoveOutlineFromNPC(); }
+            Debug.Log("Conversation trigger exit: " + (conversation==null));
             conversation.enabled = false;
         }
     }

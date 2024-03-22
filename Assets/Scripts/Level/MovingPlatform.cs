@@ -65,6 +65,6 @@ public class MovingPlatform : MonoBehaviour
         other.transform.SetParent(null);
     }
 
-    public void PauseMove() { Debug.Log("pause moving platform"); enabled = false; }
+    public void PauseMove() { enabled = false; }
     public void UnPauseMove() { enabled = true; }
 }

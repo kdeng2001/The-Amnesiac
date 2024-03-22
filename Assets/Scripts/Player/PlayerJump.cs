@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerJump : MonoBehaviour
 {
@@ -15,12 +16,14 @@ public class PlayerJump : MonoBehaviour
     float elapseTime = 0;
     float maxHoldTime = .1f;
 
+    bool falling;
 
     void Awake()
     {
         playerActionManager = GetComponent<PlayerActionManager>();
         playerManager = GetComponent<PlayerManager>();
         rb = GetComponent<Rigidbody2D>();
+        LevelEventsManager.Instance.onJumpCancel += JumpCancel;
     }
 
     /// <summary>
@@ -28,6 +31,8 @@ public class PlayerJump : MonoBehaviour
     /// </summary>
     public void Jump(float baseJumpForce, float holdJumpHeight)
     {
+        if(rb.velocity.y < 0) { falling = true; }
+        else { falling = false; }
         if(playerActionManager.jumpValue && playerManager.playerGrounded.IsGrounded() && !jumping)
         {   
             rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -46,5 +51,14 @@ public class PlayerJump : MonoBehaviour
             elapseTime += Time.deltaTime;
         }
         
+    }
+    
+    private void JumpCancel()
+    {
+        if(!falling)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+        }
+
     }
 }

@@ -46,6 +46,12 @@ public class LevelEventsManager : MonoBehaviour
         if(onMemoryShardFound != null) { onMemoryShardFound(); }
     }
 
+    public event Action onJumpCancel;
+    public void JumpCancel()
+    {
+        if(onJumpCancel != null) { onJumpCancel(); }
+    }
+
     public event Action<Conversation> onTriggerDialogue;
     public void TriggerDialogue(Conversation conversation)
     {

@@ -3752,6 +3752,7 @@ MonoBehaviour:
   dialogueList:
   - {fileID: 811951541}
   oneTimeConversation: 0
+  collisionTrigger: 1
 --- !u!1 &435236963
 GameObject:
   m_ObjectHideFlags: 0
@@ -4195,6 +4196,7 @@ MonoBehaviour:
   - {fileID: 1781795271}
   - {fileID: 331563938}
   oneTimeConversation: 0
+  collisionTrigger: 0
 --- !u!4 &571410888
 Transform:
   m_ObjectHideFlags: 0
@@ -4706,7 +4708,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueList:
   - {fileID: 1787935434}
-  oneTimeConversation: 0
+  oneTimeConversation: 1
+  collisionTrigger: 1
 --- !u!4 &651772152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3541512780308944433, guid: 4adb0a18764eec94e8a5779b68652f4a, type: 3}
@@ -5627,7 +5630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a405eb2160093542bffae9a300da510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionTrigger: 1
   conversation: {fileID: 427068126}
   outline: 0
   outlineThickness: 0.2
@@ -6514,6 +6516,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 39660c33aff9fd24d9dbeefc2e761683, type: 3}
     - target: {fileID: 8964669686346267407, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
+      propertyPath: outline
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964669686346267407, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
       propertyPath: conversation
       value: 
       objectReference: {fileID: 1665237070}
@@ -6524,10 +6530,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5518608684571828486, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1397187421}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
 --- !u!1 &1031841129
 GameObject:
@@ -6958,7 +6961,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueList:
   - {fileID: 1597941421}
-  oneTimeConversation: 0
+  oneTimeConversation: 1
+  collisionTrigger: 1
 --- !u!1 &1124405292
 GameObject:
   m_ObjectHideFlags: 0
@@ -7291,7 +7295,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueList:
   - {fileID: 2005862204}
-  oneTimeConversation: 0
+  oneTimeConversation: 1
+  collisionTrigger: 1
 --- !u!1 &1368541635
 GameObject:
   m_ObjectHideFlags: 0
@@ -7594,7 +7599,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382874976}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55697904f693ad343b873137881696f8, type: 3}
   m_Name: 
@@ -7604,6 +7609,7 @@ MonoBehaviour:
   - {fileID: 760106508}
   - {fileID: 1167396782}
   oneTimeConversation: 0
+  collisionTrigger: 0
 --- !u!1 &1384675386
 GameObject:
   m_ObjectHideFlags: 0
@@ -7817,26 +7823,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 9a409a780da35cc479f63c3f14dfbf26, type: 3}
---- !u!1 &1397187417 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5518608684571828486, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
-  m_PrefabInstance: {fileID: 1011415473}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1397187421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397187417}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ed8977f897a4643a665a15a3b44cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactable: 1
-  repeatsDialogue: 1
-  despawnsAfterInteract: 0
 --- !u!4 &1401904739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8371341125946371205, guid: a9b11b85907e39848b15a9302a2fd02e, type: 3}
@@ -8371,6 +8357,10 @@ PrefabInstance:
     - target: {fileID: 1081184783708084400, guid: 9a409a780da35cc479f63c3f14dfbf26, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081184783708084400, guid: 9a409a780da35cc479f63c3f14dfbf26, type: 3}
+      propertyPath: minAliveTime
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1081184783708084400, guid: 9a409a780da35cc479f63c3f14dfbf26, type: 3}
       propertyPath: speakPosition
@@ -9187,8 +9177,20 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6605439191396946542, guid: 647fbb2438299e749af9cb6a8ec089b0, type: 3}
+      propertyPath: speed
+      value: 20.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6605439191396946542, guid: 647fbb2438299e749af9cb6a8ec089b0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6605439191396946542, guid: 647fbb2438299e749af9cb6a8ec089b0, type: 3}
+      propertyPath: baseJumpForce
+      value: 37.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6605439191396946542, guid: 647fbb2438299e749af9cb6a8ec089b0, type: 3}
       propertyPath: holdJumpHeight
-      value: 2.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6930947977830621453, guid: 647fbb2438299e749af9cb6a8ec089b0, type: 3}
       propertyPath: birdPower.y
@@ -10694,7 +10696,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665237067}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55697904f693ad343b873137881696f8, type: 3}
   m_Name: 
@@ -10712,7 +10714,8 @@ MonoBehaviour:
   - {fileID: 1421543099}
   - {fileID: 122443803}
   - {fileID: 1301431548}
-  oneTimeConversation: 0
+  oneTimeConversation: 1
+  collisionTrigger: 1
 --- !u!4 &1681597141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7169778766287831942, guid: 8566b9352880b9641b258f28a64eeaf5, type: 3}
@@ -12923,7 +12926,8 @@ MonoBehaviour:
   - {fileID: 673876867}
   - {fileID: 1257492794}
   - {fileID: 750752867}
-  oneTimeConversation: 0
+  oneTimeConversation: 1
+  collisionTrigger: 1
 --- !u!1 &2062582792
 GameObject:
   m_ObjectHideFlags: 0
@@ -13227,7 +13231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a405eb2160093542bffae9a300da510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionTrigger: 1
   conversation: {fileID: 2056206324}
   outline: 0
   outlineThickness: 0.2
