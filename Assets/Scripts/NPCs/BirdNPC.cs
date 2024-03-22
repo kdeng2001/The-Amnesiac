@@ -33,8 +33,8 @@ public class BirdNPC : NPC
         GetComponentInChildren<BoxCollider2D>().enabled = false;
         playerSprite = target.gameObject.GetComponentInChildren<SpriteRenderer>();
         followPlayer = true;
-        PlayerGlide.glidingStart += GlidingStart;
-        PlayerGlide.glidingEnd += GlidingEnd;
+        //PlayerGlide.glidingStart += GlidingStart;
+        //PlayerGlide.glidingEnd += GlidingEnd;
     }
 
     public void GlidingStart()

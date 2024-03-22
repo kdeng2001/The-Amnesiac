@@ -42,7 +42,11 @@ public class PlayerGlide : MonoBehaviour
     public void Glide(float birdBasePower, float birdDecreasePowerRate, float glideTime)
     {
         // if grounded, prepare for glide
-        if(playerManager.playerGrounded.IsGrounded()) { glideStart = false; }
+        if(playerManager.playerGrounded.IsGrounded()) 
+        { 
+            if(glideStart) { glidingEnd?.Invoke(); }
+            glideStart = false; 
+        }
         
         
         // Handle glide
@@ -60,10 +64,15 @@ public class PlayerGlide : MonoBehaviour
                 GlideCooldown(glideTime);
             }
             // check if glide too long, else playerGlide
-            if(glideEnd) { return; }
+            if(glideEnd) 
+            {
+                glidingEnd?.Invoke();
+                return; 
+            }
             rb.velocity = new Vector2(rb.velocity.x, -1 * (currentBirdPower));
         }
     }
+
     /// <summary>
     /// sets variables that control glide
     /// </summary>
@@ -75,7 +84,6 @@ public class PlayerGlide : MonoBehaviour
         currentBirdPower = birdBasePower;
         glidingStart?.Invoke();
     }
-
     /// <summary>
     /// counts time while glide is active, ends glide if enough time passes
     /// </summary>

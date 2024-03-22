@@ -4397,10 +4397,12 @@ MonoBehaviour:
   interactable: 1
   repeatsDialogue: 1
   despawnsAfterInteract: 0
-  speed: 1
+  speed: 10
   animator: {fileID: 0}
+  sprite: {fileID: 0}
   target: {fileID: 1613474809}
   followPlayer: 0
+  playerSprite: {fileID: 0}
 --- !u!1001 &550720629
 PrefabInstance:
   m_ObjectHideFlags: 0
