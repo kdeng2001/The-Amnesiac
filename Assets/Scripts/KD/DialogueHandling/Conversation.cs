@@ -22,7 +22,7 @@ public class Conversation : MonoBehaviour
         hasStarted = false;
         hasEnded = false;
     }
-    private void OnEnable()
+    public virtual void OnEnable()
     {
         if(oneTimeConversation && hasEnded) { enabled = false; return; }
         ConversationManager.onSetCurrentConversation?.Invoke(this);

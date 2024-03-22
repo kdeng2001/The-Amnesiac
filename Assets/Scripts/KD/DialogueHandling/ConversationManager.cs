@@ -52,6 +52,7 @@ public class ConversationManager : MonoBehaviour
             currentConversation.SetStart();
             PrepareDialogue();
             LevelEventsManager.Instance.PauseActivity();
+            onStart?.Invoke();
         }
     }
     /// <summary>
@@ -65,6 +66,7 @@ public class ConversationManager : MonoBehaviour
         if (currentIndex < currentConversation.dialogueList.Length - 1) 
         {
             currentIndex++;
+            onContinue?.Invoke();
             Debug.Log("currentIndex: " + currentIndex);
             PrepareDialogue();
             return true;
@@ -108,15 +110,23 @@ public class ConversationManager : MonoBehaviour
 
     public delegate void OnUnSetCurrentConversation();
     public static OnUnSetCurrentConversation onUnSetCurrentConversation;
+
+    public delegate void OnStart();
+    public static OnStart onStart;
     /// <summary>
     /// Calls functions that are subscribed to onStartConversation event
     /// </summary>
     public delegate void OnStartConversation();
     public static OnStartConversation onStartConversation;
     /// <summary>
+    /// calls functions that are subscribed to the onContinue event
+    /// </summary>
+    public delegate void OnContinue();
+    public static OnContinue onContinue;
+    /// <summary>
     /// calls functions that are subscribed to the onContinueConversation event
     /// </summary>
-    /// <returns></returns>
+    /// <returns>returns whether the conversation can continue</returns>
     public delegate bool OnContinueConversation();
     public static OnContinueConversation onContinueConversation;
     /// <summary>

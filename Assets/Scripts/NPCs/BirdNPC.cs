@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BirdLevel1 : NPC
+public class BirdNPC : NPC
 {
     //private void OnEnable()
     //{

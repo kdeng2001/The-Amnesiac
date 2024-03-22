@@ -9,5 +9,5 @@ public class NPC : MonoBehaviour
     [SerializeField] bool despawnsAfterInteract = false;
 
     bool finishedDialogue = false;
-    public virtual void Move(Vector2 position) { }
+    public virtual void Move(Transform target) { }
 }
