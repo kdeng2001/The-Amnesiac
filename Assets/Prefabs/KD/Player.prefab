@@ -337,18 +337,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3469930761866728472}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cda8080fc947074490d89f63e38dc57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  baseJumpForce: 10
-  holdJumpHeight: 2.4
+  speed: 17
+  baseJumpForce: 22
+  holdJumpForce: 1.76
+  jumpCancel: 1
+  delayJumpCancelTime: 0.15
   birdBasePower: 5
   birdDecreasePowerRate: 1
   glideTime: 2
-  canGlide: 0
+  canGlide: 1
 --- !u!114 &4106301045048578212
 MonoBehaviour:
   m_ObjectHideFlags: 0
