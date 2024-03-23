@@ -6,6 +6,7 @@ public class Memory : MonoBehaviour
 {
     SpriteRenderer sprite;
     [SerializeField] public int MemoryNumber;
+    [SerializeField] public bool isBonus = false;
 
     private void Awake() { sprite = GetComponent<SpriteRenderer>(); }
 
@@ -13,7 +14,7 @@ public class Memory : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            MemoryManager.Instance.FoundMemoryShard(MemoryNumber, gameObject);
+            if(!isBonus) { MemoryManager.Instance.FoundMemoryShard(MemoryNumber, gameObject); }
             sprite.enabled = false;
         }
     }

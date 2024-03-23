@@ -7,10 +7,12 @@ public class BirdNPC : NPC
     [SerializeField] Transform target;
     [SerializeField] bool followPlayer = false;
     [SerializeField] SpriteRenderer playerSprite;
+    [SerializeField] bool enableFollowPlayer = false;
     public override void Start()
     {
         base.Start();
         BirdTutorial.canFollowPlayer += FollowPlayer;
+        if(enableFollowPlayer) { FollowPlayer(); }
     }
     private void FixedUpdate()
     {

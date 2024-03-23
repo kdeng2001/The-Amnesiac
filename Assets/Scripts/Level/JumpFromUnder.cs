@@ -18,12 +18,12 @@ public class JumpFromUnder : MonoBehaviour
     {
         if(PlayerCanJumpFromUnder()) 
         {
-            Debug.Log("can jump from under");
+            //Debug.Log("can jump from under");
             physicalCollider.isTrigger = true;
         }
         else
         {
-            Debug.Log("cannot jump from under");
+            //Debug.Log("cannot jump from under");
             physicalCollider.isTrigger = false;
         }
     }
