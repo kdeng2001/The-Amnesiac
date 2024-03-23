@@ -75,19 +75,7 @@ public class LevelEventsManager : MonoBehaviour
     {
         if (onUnPauseActivity != null) { onUnPauseActivity(); }
     }
+    public delegate void ResetLevel();
+    public static ResetLevel resetLevel;
 
-
-
-    /// <summary>
-    /// Finish tutorial level bird dialogue
-    /// </summary>
-    public event Action onFinishBirdDialogue;
-    public void FinishBirdDialogue()
-    {
-        if (onFinishBirdDialogue != null) 
-        { 
-            onFinishBirdDialogue(); 
-            playerManager.canGlide = true; 
-        }
-    }
 }

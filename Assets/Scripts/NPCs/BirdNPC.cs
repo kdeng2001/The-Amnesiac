@@ -47,18 +47,4 @@ public class BirdNPC : NPC
         speed /= 30;
         Debug.Log("glide end");
     }
-    //private void OnEnable()
-    //{
-    //    LevelEventsManager.Instance.onFinishBirdDialogue += DisableTrigger;
-    //}
-    //private void OnDisable()
-    //{
-    //    LevelEventsManager.Instance.onFinishBirdDialogue -= DisableTrigger;
-    //}
-
-    //public override void DisableTrigger()
-    //{
-    //    base.DisableTrigger();
-    //    GetComponentInChildren<SpriteRenderer>().enabled = false;
-    //}
 }

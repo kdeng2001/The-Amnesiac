@@ -155,7 +155,7 @@ Transform:
   m_GameObject: {fileID: 3667605704649517264}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -273,7 +273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fromUnderCheck: {fileID: 4041167433401716425}
-  platformDimensions: {x: 6.5, y: 1.5}
+  platformDimensions: {x: 6.5, y: 2.52}
   player:
     serializedVersion: 2
     m_Bits: 64
+  physicalCollider: {fileID: 4549272544446961099}
