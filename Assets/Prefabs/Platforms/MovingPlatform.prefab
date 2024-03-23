@@ -130,6 +130,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.1833744, y: 0.7735493}
   m_EdgeRadius: 0
+--- !u!1 &3667605704649517264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4041167433401716425}
+  m_Layer: 3
+  m_Name: FromUnderCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4041167433401716425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667605704649517264}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4059428671620445468}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4400300100557205835
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,6 +172,7 @@ GameObject:
   - component: {fileID: 4059428671620445468}
   - component: {fileID: 7610431356982589125}
   - component: {fileID: 1467862721040381921}
+  - component: {fileID: 5719288210190787528}
   m_Layer: 3
   m_Name: MovingPlatform
   m_TagString: Untagged
@@ -162,6 +194,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1606285532948781177}
+  - {fileID: 4041167433401716425}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &7610431356982589125
@@ -227,3 +260,21 @@ MonoBehaviour:
   Speed: 3
   platformWaitTime: 0.5
   movingPlatform: {fileID: 4400300100557205835}
+--- !u!114 &5719288210190787528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400300100557205835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ffd271b4741cd40a3224371c85d9ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fromUnderCheck: {fileID: 4041167433401716425}
+  platformDimensions: {x: 6.5, y: 2.52}
+  player:
+    serializedVersion: 2
+    m_Bits: 64
+  physicalCollider: {fileID: 4549272544446961099}

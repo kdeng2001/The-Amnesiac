@@ -7,10 +7,12 @@ public class BirdNPC : NPC
     [SerializeField] Transform target;
     [SerializeField] bool followPlayer = false;
     [SerializeField] SpriteRenderer playerSprite;
+    [SerializeField] bool enableFollowPlayer = false;
     public override void Start()
     {
         base.Start();
         BirdTutorial.canFollowPlayer += FollowPlayer;
+        if(enableFollowPlayer) { FollowPlayer(); }
     }
     private void FixedUpdate()
     {
@@ -47,18 +49,4 @@ public class BirdNPC : NPC
         speed /= 30;
         Debug.Log("glide end");
     }
-    //private void OnEnable()
-    //{
-    //    LevelEventsManager.Instance.onFinishBirdDialogue += DisableTrigger;
-    //}
-    //private void OnDisable()
-    //{
-    //    LevelEventsManager.Instance.onFinishBirdDialogue -= DisableTrigger;
-    //}
-
-    //public override void DisableTrigger()
-    //{
-    //    base.DisableTrigger();
-    //    GetComponentInChildren<SpriteRenderer>().enabled = false;
-    //}
 }

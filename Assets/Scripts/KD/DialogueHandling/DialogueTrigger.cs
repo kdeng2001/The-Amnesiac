@@ -18,6 +18,7 @@ public class DialogueTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision) 
     {
+        if(!enabled) { return; }
         if(collision.CompareTag("Player"))
         {
             Debug.Log("Conversation trigger enter: " + conversation.name);
@@ -28,14 +29,16 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(conversation.oneTimeConversation) { return; }
+        if (!enabled) { return; }
+        if (conversation.oneTimeConversation) { return; }
         if(conversation.collisionTrigger) { return; }
         if(!conversation.enabled) { conversation.enabled = true; }
     }
 
     private void OnTriggerExit2D(Collider2D collision) 
     {
-        if(collision.CompareTag("Player"))
+        if (!enabled) { return; }
+        if (collision.CompareTag("Player"))
         {
             if(outline) { RemoveOutlineFromNPC(); }
             Debug.Log("Conversation trigger exit: " + (conversation==null));
