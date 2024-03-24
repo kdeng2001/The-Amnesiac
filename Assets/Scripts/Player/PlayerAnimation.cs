@@ -53,37 +53,29 @@ public class PlayerAnimation : MonoBehaviour
 
     public void SetAnimationMoveRight()
     {
-        if (playerActionManager.moveValue.x > 0) { sprite.flipX = false; }
         currentDirection = directions[1];
+        sprite.flipX = false;
         PlayAnimation("PlayerMove");
     }
 
     public void SetAnimationMoveLeft()
     {
-        if (playerActionManager.moveValue.x < 0) { sprite.flipX = true; }
         currentDirection = directions[0];
+        sprite.flipX = true;
         PlayAnimation("PlayerMove");
     }
 
     public void SetAnimationIdleRight()
     {
-        if (playerActionManager.moveValue.x == 0 && currentDirection == directions[1]) 
-        { 
-            sprite.flipX = false;         
-            currentDirection = directions[1];
-            PlayAnimation("PlayerIdle");
-        }
-
+        sprite.flipX = false;         
+        currentDirection = directions[1];
+        PlayAnimation("PlayerIdle");
     }
     public void SetAnimationIdleLeft()
     {
-        if (playerActionManager.moveValue.x == 0 && currentDirection == directions[0]) 
-        { 
-            sprite.flipX = true;
-            currentDirection = directions[0];
-            PlayAnimation("PlayerIdle"); 
-        }
-
+        sprite.flipX = true;
+        currentDirection = directions[0];
+        PlayAnimation("PlayerIdle"); 
     }
 
 }
