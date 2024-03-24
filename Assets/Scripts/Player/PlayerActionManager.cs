@@ -75,7 +75,7 @@ public class PlayerActionManager : MonoBehaviour
 
     void SetMove(Vector2 value) { moveValue = value; }
     void SetJump(bool value) { jumpValue = value; }
-    void SetGlide(bool value) { glideValue = value; }
+    void SetGlide(bool value) { glideValue = value; /*Debug.Log("glide value: " + value);*/ }
     void SetInteract(bool value) { interactValue = value; }
     void OnJumpCancel(bool value) 
     {

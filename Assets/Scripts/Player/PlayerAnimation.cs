@@ -36,7 +36,8 @@ public class PlayerAnimation : MonoBehaviour
 
     public void HandlePlayerMoveAnimation()
     {
-        if(Mathf.Abs(playerActionManager.moveValue.x) > 0) { SetAnimationMove(); }
+        if(playerManager.playerGlide.gliding) { SetAnimationGlide(); }
+        else if(Mathf.Abs(playerActionManager.moveValue.x) > 0) { SetAnimationMove(); }
         else { SetAnimationIdle(); }
     }
 
@@ -49,6 +50,11 @@ public class PlayerAnimation : MonoBehaviour
     {
             if(currentDirection == "Left") { SetAnimationIdleLeft(); }
             else { SetAnimationIdleRight(); }
+    }
+    public void SetAnimationGlide()
+    {
+        if(currentDirection == "Left") { SetAnimationGlideLeft(); }
+        else { SetAnimationGlideRight(); }
     }
 
     public void SetAnimationMoveRight()
@@ -78,4 +84,16 @@ public class PlayerAnimation : MonoBehaviour
         PlayAnimation("PlayerIdle"); 
     }
 
+    public void SetAnimationGlideRight() 
+    {
+        sprite.flipX = false;
+        currentDirection = directions[1];
+        PlayAnimation("PlayerGlide");
+    }
+    public void SetAnimationGlideLeft() 
+    {
+        sprite.flipX = true;
+        currentDirection = directions[0];
+        PlayAnimation("PlayerGlide");
+    }
 }
