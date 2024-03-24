@@ -23,4 +23,15 @@ public class PlayerMovement : MonoBehaviour
         else { downVelocity = 0; }
         rb.velocity = moveVelocity = new Vector2(speed * playerActionManager.moveValue.x, rb.velocity.y + downVelocity);
     }
+    /// <summary>
+    /// Called to Move programatically
+    /// </summary>
+    /// <param name="speed"></param>
+    /// <param name="direction"></param>
+    public void Move(float speed, Vector2 direction)
+    {
+        if (playerActionManager.moveValue.y < 0) { downVelocity = baseDownVelocity * speed; }
+        else { downVelocity = 0; }
+        rb.velocity = speed * direction + Vector2.up * downVelocity;
+    }
 }

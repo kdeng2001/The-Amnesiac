@@ -91,4 +91,43 @@ public class PlayerGlide : MonoBehaviour
         elapsedGlideTime += Time.deltaTime;
         if(elapsedGlideTime > glideTime) { glideEnd = true; }
     }
+
+    /// <summary>
+    /// Called to Glide programatically
+    /// </summary>
+    /// <param name="glideBasePower"></param>
+    /// <param name="birdDecreasePowerRate"></param>
+    /// <param name="glideTime"></param>
+    public void Glide(float glideBasePower, float birdDecreasePowerRate, float glideTime, bool glideValue)
+    {
+        //Debug.Log("gliding var: " + gliding);
+        // if grounded, prepare for glide
+        gliding = glideValue;
+        if (playerManager.playerGrounded.IsGrounded()) { glideStart = false; gliding = false; }
+
+
+        // Handle glide
+        if (!playerManager.playerGrounded.IsGrounded() && glideValue)
+        {
+            // player only glides when descending
+            if (rb.velocity.y > 0) { return; }
+
+            // setup glide variables
+            if (!glideStart) { SetUpGlideStart(glideBasePower); }
+            else
+            {
+                // bird loses glide strength over time (linear rate)
+                currentGlidePower += (birdDecreasePowerRate * Time.deltaTime);
+                GlideCooldown(glideTime);
+            }
+            // check if glide too long, else playerGlide
+            if (glideEnd)
+            {
+                gliding = false;
+                return;
+            }
+            gliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, -1 * (currentGlidePower));
+        }
+    }
 }
