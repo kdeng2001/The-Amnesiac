@@ -53,8 +53,13 @@ public class PlayerAnimation : MonoBehaviour
     }
     public void SetAnimationGlide()
     {
-        if(currentDirection == "Left") { SetAnimationGlideLeft(); }
-        else { SetAnimationGlideRight(); }
+        if(playerActionManager.moveValue.x < 0) { SetAnimationGlideLeft(); }
+        else if (playerActionManager.moveValue.x > 0) { SetAnimationGlideRight(); }
+        else if (playerActionManager.moveValue.x == 0)
+        {
+            if(currentDirection == "Left") { SetAnimationGlideLeft(); }
+            else { SetAnimationGlideRight(); }
+        }
     }
 
     public void SetAnimationMoveRight()

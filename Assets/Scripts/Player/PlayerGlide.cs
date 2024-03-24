@@ -41,7 +41,7 @@ public class PlayerGlide : MonoBehaviour
     /// </summary>
     public void Glide(float glideBasePower, float birdDecreasePowerRate, float glideTime)
     {
-        Debug.Log("gliding var: " + gliding);
+        //Debug.Log("gliding var: " + gliding);
         // if grounded, prepare for glide
         gliding = playerActionManager.glideValue;
         if(playerManager.playerGrounded.IsGrounded()){ glideStart = false; gliding = false; }
