@@ -47,8 +47,8 @@ public class EndTutorialCutscene : Cutscene
             {
 
                 player.playerGlide.Glide(player.birdBasePower, player.birdDecreasePowerRate, player.glideTime, true);
-                player.playerMovement.Move(player.speed * 0.2f, Vector2.left);
-                player.playerJump.Jump(player.baseJumpForce, player.holdJumpForce, true);                
+                player.playerJump.Jump(player.baseJumpForce, player.holdJumpForce, true);   
+                player.playerMovement.Move(player.speed * 0.2f, Vector2.left);           
                 if(time3 > conv.dialogueList[3].minAliveTime/2)
                 {
                     player.playerAnimation.SetAnimationGlideLeft();

@@ -7,7 +7,7 @@ public class Memory : MonoBehaviour
     SpriteRenderer sprite;
     [SerializeField] public int MemoryNumber;
     [SerializeField] public bool isBonus = false;
-
+    [SerializeField] public AudioSource audioClip;
     private void Awake() { sprite = GetComponent<SpriteRenderer>(); }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,6 +16,7 @@ public class Memory : MonoBehaviour
         {
             if(!isBonus) { MemoryManager.Instance.FoundMemoryShard(MemoryNumber, gameObject); }
             sprite.enabled = false;
+            audioClip.Play();
         }
     }
 

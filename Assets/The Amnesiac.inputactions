@@ -754,6 +754,17 @@
                     "action": "Pausemenu",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7ead52f-44b9-4b4c-bdd9-24f22c6d1ff9",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pausemenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

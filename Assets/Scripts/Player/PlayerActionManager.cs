@@ -10,6 +10,7 @@ public class PlayerActionManager : MonoBehaviour
     public bool jumpValue { get; private set; }
     public bool glideValue { get; private set; }
     public bool interactValue { get; private set; }
+    public bool escapeValue { get; private set; }
     private void OnEnable()
     {
         if(TryGetComponent(out PlayerInput input)) { RegisterActions(input); }
@@ -23,6 +24,7 @@ public class PlayerActionManager : MonoBehaviour
 
     void RegisterActions(PlayerInput input)
     {
+        input.actions.FindActionMap("UI").Enable();
         InputAction moveAction = input.actions["Move"];
         if(moveAction != null) 
         { 
@@ -44,6 +46,12 @@ public class PlayerActionManager : MonoBehaviour
         if (interactAction != null)
         {
             interactAction.canceled += context => OnInteractStart(context);
+        }
+        InputAction escapeAction = input.actions["Pausemenu"];
+        if (escapeAction != null)
+        {
+            escapeAction.performed += context => OnEscape(context);
+            escapeAction.canceled += context => SetEscape(context.ReadValueAsButton());
         }
     }
 
@@ -71,12 +79,19 @@ public class PlayerActionManager : MonoBehaviour
         {
             interactAction.canceled -= context => OnInteractStart(context);
         }
+        InputAction escapeAction = input.actions["Pausemenu"];
+        if (escapeAction != null)
+        {
+            escapeAction.performed += context => OnEscape(context);
+            escapeAction.canceled += context => SetEscape(context.ReadValueAsButton());
+        }
     }
 
     void SetMove(Vector2 value) { moveValue = value; }
     void SetJump(bool value) { jumpValue = value; }
     void SetGlide(bool value) { glideValue = value; /*Debug.Log("glide value: " + value);*/ }
     void SetInteract(bool value) { interactValue = value; }
+    void SetEscape(bool value) { escapeValue = value; }
     void OnJumpCancel(bool value) 
     {
         LevelEventsManager.Instance.JumpCancel();
@@ -87,6 +102,13 @@ public class PlayerActionManager : MonoBehaviour
         SetInteract(context.ReadValueAsButton());
         LevelEventsManager.Instance.Interact();
         //Debug.Log("interact");
+    }
+
+    void OnEscape(InputAction.CallbackContext context)
+    {
+        Debug.Log("escape!");
+        SetEscape(context.ReadValueAsButton());
+        PauseMenu.togglePause();
     }
 }
 

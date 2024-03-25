@@ -36,7 +36,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void HandlePlayerMoveAnimation()
     {
-        Debug.Log("Handle player animation");
+        //Debug.Log("Handle player animation");
         if(playerManager.playerGlide.gliding) { SetAnimationGlide(); }
         else if(Mathf.Abs(playerActionManager.moveValue.x) > 0) { SetAnimationMove(); }
         else { SetAnimationIdle(); }

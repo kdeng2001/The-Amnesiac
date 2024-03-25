@@ -17,6 +17,7 @@ public class PlayerJump : MonoBehaviour
     float maxHoldTime = .1f;
 
     bool falling;
+    bool hasJumped;
 
     void Awake()
     {
@@ -34,7 +35,9 @@ public class PlayerJump : MonoBehaviour
         if(rb.velocity.y < 0) { falling = true; }
         else { falling = false; }
         if(playerActionManager.jumpValue && playerManager.playerGrounded.IsGrounded() && !jumping)
-        {   
+        {
+            playerManager.audioSource.clip = playerManager.jumpSFX;
+            playerManager.audioSource.Play();
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * baseJumpForce, ForceMode2D.Impulse);
             jumping = true;
@@ -50,6 +53,7 @@ public class PlayerJump : MonoBehaviour
             rb.AddForce(Vector2.up * (holdJumpForce - elapseTime * 10) * 100);
             elapseTime += Time.deltaTime;
         }
+
         
     }
     private void JumpCancel()
@@ -80,6 +84,8 @@ public class PlayerJump : MonoBehaviour
         else { falling = false; }
         if (jumpValue && playerManager.playerGrounded.IsGrounded() && !jumping)
         {
+            playerManager.audioSource.clip = playerManager.jumpSFX;
+            playerManager.audioSource.Play();
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * baseJumpForce, ForceMode2D.Impulse);
             jumping = true;
