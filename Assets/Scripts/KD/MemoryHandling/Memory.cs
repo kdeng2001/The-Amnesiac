@@ -16,7 +16,7 @@ public class Memory : MonoBehaviour
         {
             if(!isBonus) { MemoryManager.Instance.FoundMemoryShard(MemoryNumber, gameObject); }
             sprite.enabled = false;
-            audioClip.Play();
+            audioClip?.Play();
         }
     }
 

@@ -40,7 +40,8 @@ public class PlayerManager : MonoBehaviour
 
     public AudioClip jumpSFX;
     public AudioClip landingSFX;
-    public AudioSource audioSource;
+    public AudioSource jumpSource;
+    public AudioSource landingSource;
 
     public bool canGlide = false;
     private bool pauseActivity = false;

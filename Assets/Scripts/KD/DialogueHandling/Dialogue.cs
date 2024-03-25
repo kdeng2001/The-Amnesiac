@@ -15,6 +15,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField] Transform speakPosition;
     [SerializeField] public float minAliveTime = 0;
     Transform parentOG;
+    public AudioSource audioSource;
 
     private void Awake()
     {
@@ -28,9 +29,12 @@ public class Dialogue : MonoBehaviour
         transform.SetParent(speakPosition);
         transform.localPosition = Vector3.zero;
         gameObject.SetActive(true);
+        audioSource?.Play();
+        
     }
     public void EndDialogue()
     {
+        
         transform.SetParent(ConversationManager.Instance.transform);
         transform.parent = parentOG;
         //Debug.Log("End dialogue: " + gameObject.name);
