@@ -26,7 +26,6 @@ public class PlayerJump : MonoBehaviour
         if(playerManager.jumpCancel) {  LevelEventsManager.Instance.onJumpCancel += JumpCancel; }
        
     }
-
     /// <summary>
     /// Called every frame to handle Jump behavior
     /// </summary>
@@ -53,7 +52,6 @@ public class PlayerJump : MonoBehaviour
         }
         
     }
-    
     private void JumpCancel()
     {
         if(!playerManager.jumpCancel) { return; }
@@ -63,11 +61,39 @@ public class PlayerJump : MonoBehaviour
         }
 
     }
-
     public IEnumerator delayJumpCancel()
     {
         yield return new WaitForSeconds(playerManager.delayJumpCancelTime);
         if(rb.velocity.y > 0) { rb.velocity = new Vector2(rb.velocity.x, 0); }
         
+    }    
+    
+    /// <summary>
+    /// Called to jump programatically
+    /// </summary>
+    /// <param name="baseJumpForce"></param>
+    /// <param name="holdJumpForce"></param>
+    /// <param name="jumpValue"> determines if jump is "held" </param>
+    public void Jump(float baseJumpForce, float holdJumpForce, bool jumpValue)
+    {
+        if (rb.velocity.y < 0) { falling = true; }
+        else { falling = false; }
+        if (jumpValue && playerManager.playerGrounded.IsGrounded() && !jumping)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * baseJumpForce, ForceMode2D.Impulse);
+            jumping = true;
+            elapseTime = 0;
+            rb.AddForce(Vector2.up * baseJumpForce);
+        }
+        else if (jumpValue == false)
+        {
+            jumping = false;
+        }
+        else if (jumping && elapseTime < maxHoldTime && !playerManager.playerGrounded.IsGrounded())
+        {
+            rb.AddForce(Vector2.up * (holdJumpForce - elapseTime * 10) * 100);
+            elapseTime += Time.deltaTime;
+        }
     }
 }

@@ -9,6 +9,7 @@ public class MemoryManager : MonoBehaviour
     Memory[] memoriesInScene;
     public static MemoryManager Instance;
     int collected = 0;
+    public int mainMemoryCount = 0;
     private void Awake()
     {
         if(MemoryManager.Instance != null) { Destroy(gameObject); return; }
@@ -19,7 +20,9 @@ public class MemoryManager : MonoBehaviour
         memoryUI = GetComponentsInChildren<Image>();
         memoriesInScene = GetMemoriesInScene();
 
-        for(int i=memoryUI.Length - 1; i>=memoriesInScene.Length; i--)
+        for(int i=0; i<memoriesInScene.Length; i++) { if (!memoriesInScene[i].isBonus) { mainMemoryCount++; } }
+
+        for(int i=memoryUI.Length - 1; i>=mainMemoryCount; i--)
         {
             //Debug.Log(memoryUI[i]);
             memoryUI[i].gameObject.SetActive(false);
@@ -36,11 +39,16 @@ public class MemoryManager : MonoBehaviour
     public void FoundMemoryShard(int shardNumber, GameObject memory)
     {
         //Debug.Log("Player Collects Memory");
-        if(memory.TryGetComponent(out SpriteRenderer sprite))
-        {
+        if(memory.TryGetComponent(out Memory mem)) 
+        { 
+            if(mem != null && mem.isBonus) { }         
+            else if(memory.TryGetComponent(out SpriteRenderer sprite))
+            {
             memoryUI[shardNumber].color = sprite.color;
+            collected++;
+            }
         }
-        collected++;
+
         StartCoroutine(DelayDisable(memory));
         //memory.SetActive(false);
     }
@@ -54,6 +62,6 @@ public class MemoryManager : MonoBehaviour
 
     public bool FoundAllMemoryShards()
     {
-        return collected == memoriesInScene.Length;
+        return collected == mainMemoryCount;
     }
 }
