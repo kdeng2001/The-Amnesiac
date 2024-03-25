@@ -16,6 +16,11 @@ public class BirdNPC : NPC
         if(enableFollowPlayer) { FollowPlayer(); }
         baseSpeed = speed;
     }
+
+    private void OnDisable()
+    {
+        BirdTutorial.canFollowPlayer -= FollowPlayer;
+    }
     private void FixedUpdate()
     {
         if(followPlayer) 

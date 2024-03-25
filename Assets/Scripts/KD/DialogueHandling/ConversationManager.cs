@@ -28,6 +28,13 @@ public class ConversationManager : MonoBehaviour
         onContinueConversation += ContinueConversation;
         onEndConversation += EndConversation;
     }
+
+    private void OnDisable()
+    {
+        onStartConversation -= PrepareConversation;
+        onContinueConversation -= ContinueConversation;
+        onEndConversation -= EndConversation;
+    }
     /// <summary>
     /// Sets current conversation being had
     /// </summary>
