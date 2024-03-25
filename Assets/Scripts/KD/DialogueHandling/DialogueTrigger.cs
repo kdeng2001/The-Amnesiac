@@ -21,7 +21,7 @@ public class DialogueTrigger : MonoBehaviour
         if(!enabled) { return; }
         if(collision.CompareTag("Player"))
         {
-            Debug.Log("Conversation trigger enter: " + conversation.name);
+            //Debug.Log("Conversation trigger enter: " + conversation.name);
             if(outline) { GiveOutlineToNPC(); }
             conversation.enabled = true;
         } 
@@ -41,7 +41,7 @@ public class DialogueTrigger : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             if(outline) { RemoveOutlineFromNPC(); }
-            Debug.Log("Conversation trigger exit: " + (conversation==null));
+            //Debug.Log("Conversation trigger exit: " + (conversation==null));
             conversation.enabled = false;
         }
     }

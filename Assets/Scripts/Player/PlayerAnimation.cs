@@ -7,7 +7,7 @@ public class PlayerAnimation : MonoBehaviour
     PlayerActionManager playerActionManager;
     PlayerManager playerManager;
     SpriteRenderer sprite;
-    Animator playerAnimator;
+    public Animator playerAnimator;
     public string currentAnimation = "PlayerIdle";
     string[] directions = { "Left", "Right" };
     public string currentDirection = "Right";
@@ -36,6 +36,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void HandlePlayerMoveAnimation()
     {
+        Debug.Log("Handle player animation");
         if(playerManager.playerGlide.gliding) { SetAnimationGlide(); }
         else if(Mathf.Abs(playerActionManager.moveValue.x) > 0) { SetAnimationMove(); }
         else { SetAnimationIdle(); }
@@ -43,13 +44,14 @@ public class PlayerAnimation : MonoBehaviour
 
     public void SetAnimationMove()
     {
-            if (playerActionManager.moveValue.x > 0) {  SetAnimationMoveRight(); }
-            else { SetAnimationMoveLeft(); }
+        if (playerActionManager.moveValue.x > 0) {  SetAnimationMoveRight(); }
+        else { SetAnimationMoveLeft(); }
     }
     public void SetAnimationIdle()
     {
-            if(currentDirection == "Left") { SetAnimationIdleLeft(); }
-            else { SetAnimationIdleRight(); }
+        if(currentDirection == "Left") { SetAnimationIdleLeft(); }
+        else { SetAnimationIdleRight(); }
+        //Debug.Log("idling");
     }
     public void SetAnimationGlide()
     {
@@ -81,12 +83,14 @@ public class PlayerAnimation : MonoBehaviour
         sprite.flipX = false;         
         currentDirection = directions[1];
         PlayAnimation("PlayerIdle");
+        //Debug.Log("idle right");
     }
     public void SetAnimationIdleLeft()
     {
         sprite.flipX = true;
         currentDirection = directions[0];
-        PlayAnimation("PlayerIdle"); 
+        PlayAnimation("PlayerIdle");
+        //Debug.Log("idle left");
     }
 
     public void SetAnimationGlideRight() 

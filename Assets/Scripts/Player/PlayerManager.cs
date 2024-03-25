@@ -72,6 +72,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(!enabled) { return; }
         playerMovement.Move(speed);
         playerJump.Jump(baseJumpForce, holdJumpForce);
         if(canGlide) { playerGlide.Glide(birdBasePower, birdDecreasePowerRate, glideTime); }  
@@ -83,7 +84,9 @@ public class PlayerManager : MonoBehaviour
 
     public void HandlePauseActivity()
     {
+        Debug.Log("pause to idle");
         playerAnimation.SetAnimation("PlayerIdle");
+        playerAnimation.currentAnimation = "PlayerIdle";
         playerAnimation.SetDirection(playerAnimation.currentDirection);
         playerRB.velocity = Physics2D.gravity;
         //pauseActivity = true;

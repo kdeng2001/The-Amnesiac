@@ -74,7 +74,7 @@ public class PlayerJump : MonoBehaviour
     /// <param name="baseJumpForce"></param>
     /// <param name="holdJumpForce"></param>
     /// <param name="jumpValue"> determines if jump is "held" </param>
-    public void AutoJump(float baseJumpForce, float holdJumpForce, bool jumpValue)
+    public void Jump(float baseJumpForce, float holdJumpForce, bool jumpValue)
     {
         if (rb.velocity.y < 0) { falling = true; }
         else { falling = false; }

@@ -36,7 +36,7 @@ public class ConversationManager : MonoBehaviour
     { 
         currentConversation = c;
         canStartConverse = true;
-        Debug.Log("set up conversation: " + c.name);
+        //Debug.Log("set up conversation: " + c.name);
     }
     /// <summary>
     /// called before conversation begins
@@ -46,7 +46,7 @@ public class ConversationManager : MonoBehaviour
         currentIndex = 0;
         //canStartConverse = false;
         inConversation = true;
-        Debug.Log("prepare conversation");
+        //Debug.Log("prepare conversation");
         if (currentConversation != null) 
         {
             currentConversation.SetStart();
@@ -67,7 +67,7 @@ public class ConversationManager : MonoBehaviour
         {
             currentIndex++;
             onContinue?.Invoke();
-            Debug.Log("currentIndex: " + currentIndex);
+            //Debug.Log("currentIndex: " + currentIndex);
             PrepareDialogue();
             return true;
         }
@@ -91,7 +91,7 @@ public class ConversationManager : MonoBehaviour
         canStartConverse = false; 
         inConversation = false;
         LevelEventsManager.Instance.UnPauseActivity();
-        Debug.Log("EndConversation event called");
+        //Debug.Log("EndConversation event called");
     }
 
     private void UnSetUpConversation()

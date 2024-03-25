@@ -32,6 +32,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerActionManager.moveValue.y < 0) { downVelocity = baseDownVelocity * speed; }
         else { downVelocity = 0; }
-        rb.velocity = speed * direction + Vector2.up * downVelocity;
+        rb.velocity = speed * direction + (rb.velocity.y + downVelocity) * Vector2.up ;
     }
 }

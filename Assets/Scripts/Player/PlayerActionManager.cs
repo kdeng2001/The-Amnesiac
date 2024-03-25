@@ -86,7 +86,7 @@ public class PlayerActionManager : MonoBehaviour
     {
         SetInteract(context.ReadValueAsButton());
         LevelEventsManager.Instance.Interact();
-        Debug.Log("interact");
+        //Debug.Log("interact");
     }
 }
 
