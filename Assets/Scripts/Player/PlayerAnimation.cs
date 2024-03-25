@@ -7,7 +7,7 @@ public class PlayerAnimation : MonoBehaviour
     PlayerActionManager playerActionManager;
     PlayerManager playerManager;
     SpriteRenderer sprite;
-    Animator playerAnimator;
+    public Animator playerAnimator;
     public string currentAnimation = "PlayerIdle";
     string[] directions = { "Left", "Right" };
     public string currentDirection = "Right";
@@ -36,54 +36,73 @@ public class PlayerAnimation : MonoBehaviour
 
     public void HandlePlayerMoveAnimation()
     {
-        if(Mathf.Abs(playerActionManager.moveValue.x) > 0) { SetAnimationMove(); }
+        Debug.Log("Handle player animation");
+        if(playerManager.playerGlide.gliding) { SetAnimationGlide(); }
+        else if(Mathf.Abs(playerActionManager.moveValue.x) > 0) { SetAnimationMove(); }
         else { SetAnimationIdle(); }
     }
 
     public void SetAnimationMove()
     {
-            if (playerActionManager.moveValue.x > 0) {  SetAnimationMoveRight(); }
-            else { SetAnimationMoveLeft(); }
+        if (playerActionManager.moveValue.x > 0) {  SetAnimationMoveRight(); }
+        else { SetAnimationMoveLeft(); }
     }
     public void SetAnimationIdle()
     {
-            if(currentDirection == "Left") { SetAnimationIdleLeft(); }
-            else { SetAnimationIdleRight(); }
+        if(currentDirection == "Left") { SetAnimationIdleLeft(); }
+        else { SetAnimationIdleRight(); }
+        //Debug.Log("idling");
+    }
+    public void SetAnimationGlide()
+    {
+        if(playerActionManager.moveValue.x < 0) { SetAnimationGlideLeft(); }
+        else if (playerActionManager.moveValue.x > 0) { SetAnimationGlideRight(); }
+        else if (playerActionManager.moveValue.x == 0)
+        {
+            if(currentDirection == "Left") { SetAnimationGlideLeft(); }
+            else { SetAnimationGlideRight(); }
+        }
     }
 
     public void SetAnimationMoveRight()
     {
-        if (playerActionManager.moveValue.x > 0) { sprite.flipX = false; }
         currentDirection = directions[1];
+        sprite.flipX = false;
         PlayAnimation("PlayerMove");
     }
 
     public void SetAnimationMoveLeft()
     {
-        if (playerActionManager.moveValue.x < 0) { sprite.flipX = true; }
         currentDirection = directions[0];
+        sprite.flipX = true;
         PlayAnimation("PlayerMove");
     }
 
     public void SetAnimationIdleRight()
     {
-        if (playerActionManager.moveValue.x == 0 && currentDirection == directions[1]) 
-        { 
-            sprite.flipX = false;         
-            currentDirection = directions[1];
-            PlayAnimation("PlayerIdle");
-        }
-
+        sprite.flipX = false;         
+        currentDirection = directions[1];
+        PlayAnimation("PlayerIdle");
+        //Debug.Log("idle right");
     }
     public void SetAnimationIdleLeft()
     {
-        if (playerActionManager.moveValue.x == 0 && currentDirection == directions[0]) 
-        { 
-            sprite.flipX = true;
-            currentDirection = directions[0];
-            PlayAnimation("PlayerIdle"); 
-        }
-
+        sprite.flipX = true;
+        currentDirection = directions[0];
+        PlayAnimation("PlayerIdle");
+        //Debug.Log("idle left");
     }
 
+    public void SetAnimationGlideRight() 
+    {
+        sprite.flipX = false;
+        currentDirection = directions[1];
+        PlayAnimation("PlayerGlide");
+    }
+    public void SetAnimationGlideLeft() 
+    {
+        sprite.flipX = true;
+        currentDirection = directions[0];
+        PlayAnimation("PlayerGlide");
+    }
 }

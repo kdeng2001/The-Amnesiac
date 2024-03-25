@@ -8,16 +8,21 @@ public class BirdNPC : NPC
     [SerializeField] bool followPlayer = false;
     [SerializeField] SpriteRenderer playerSprite;
     [SerializeField] bool enableFollowPlayer = false;
+    float baseSpeed;
     public override void Start()
     {
         base.Start();
         BirdTutorial.canFollowPlayer += FollowPlayer;
         if(enableFollowPlayer) { FollowPlayer(); }
+        baseSpeed = speed;
     }
     private void FixedUpdate()
     {
         if(followPlayer) 
-        { 
+        {
+            if (Vector2.SqrMagnitude(transform.position - target.position) > 1000f) { speed = baseSpeed * 4f; }
+            else if(Vector2.SqrMagnitude(transform.position - target.position) > 400f) { speed = baseSpeed * 1.5f; }
+            else { speed = baseSpeed; }
             Move(target);         
             if(transform.position.x > target.position.x) { sprite.flipX = false; }
             else { sprite.flipX = true; }

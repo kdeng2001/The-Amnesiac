@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speaker: {fileID: 0}
   speakPosition: {fileID: 0}
+  minAliveTime: 0
 --- !u!1 &7056501879172788352
 GameObject:
   m_ObjectHideFlags: 0

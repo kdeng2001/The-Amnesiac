@@ -26,6 +26,7 @@ public class Conversation : MonoBehaviour
     {
         if(oneTimeConversation && hasEnded) { enabled = false; return; }
         ConversationManager.onSetCurrentConversation?.Invoke(this);
+        if(TryGetComponent(out Cutscene cutscene)) { cutscene.enabled = true; }
         if(collisionTrigger) { ConversationManager.onStartConversation?.Invoke(); }
     }
     public void SetStart() { hasStarted = true; }
