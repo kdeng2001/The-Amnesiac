@@ -38,6 +38,10 @@ public class PlayerManager : MonoBehaviour
     [Tooltip("Determines duration of gliding before player begins falling normally")]
     [SerializeField] public float glideTime = 2f;
 
+    public AudioClip jumpSFX;
+    public AudioClip landingSFX;
+    public AudioSource audioSource;
+
     public bool canGlide = false;
     private bool pauseActivity = false;
     private void Awake()
