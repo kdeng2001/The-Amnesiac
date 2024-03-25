@@ -9,8 +9,8 @@ public class NextScene : MonoBehaviour
 
     private void OnEnable()
     {
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+        levelchanger.levelTransition();
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
 
     }
 
